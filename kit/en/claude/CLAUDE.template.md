@@ -14,7 +14,7 @@ My brain is the Obsidian vault `{{BOVEDA}}`. Everything we do grows there, conne
 ## When finishing a task (without being asked)
 - Update the project's "State for Claude" (≤10 lines: where we left off, next step, key files) and, if there were alternatives, one "Discarded and why" line.
 - Close every turn with the **assumptions** you made without asking (short list; omit it if there were none).
-- If we learned something reusable, create a short learning in `Learnings/` that links to others with **Connects with:**. Never overwrite a learning: new note with "supersedes [[...]]".
+- If the task produced a technique, a gotcha or a decision you would apply in another project, create a short learning in `Learnings/` that links to others with **Connects with:**. When in doubt, create it: one line is enough and you don't need to ask first. Link it to at least one existing learning (not only the project) and add it to `Learnings.md`. Never overwrite a learning: new note with "supersedes [[...]]".
 - If the learning touches the topic of a skill, add it to its line in `AI/Skills.md` and tell me whether that skill should be updated.
 - New project → note in its area with the 4 properties and a line in `Home.md`.
 

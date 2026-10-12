@@ -14,7 +14,7 @@ Mi cerebro es la bóveda de Obsidian `{{BOVEDA}}`. Todo lo que hacemos crece ah�
 ## Al terminar una tarea (sin que te lo pida)
 - Actualiza el «Estado para Claude» del proyecto (≤10 líneas: dónde quedamos, siguiente paso, archivos clave) y, si hubo alternativas, una línea «Descartado y por qué».
 - Cierra cada turno con los **supuestos** que tomaste sin preguntar (lista corta; omítela si no hubo).
-- Si aprendimos algo reutilizable, crea una neurona corta en `Aprendizajes/` que enlace a otras con **Conecta con:**. Nunca sobrescribas una neurona: nota nueva con «reemplaza a [[...]]».
+- Si la tarea produjo una técnica, una trampa o una decisión que aplicarías en otro proyecto, crea una neurona corta en `Aprendizajes/` que enlace a otras con **Conecta con:**. Ante la duda, créala: una línea basta y no hace falta preguntar antes. Enlázala con al menos una neurona existente (no solo con el proyecto) y agrégala a `Aprendizajes.md`. Nunca sobrescribas una neurona: nota nueva con «reemplaza a [[...]]».
 - Si la neurona toca el tema de una skill, agrégala a su línea en `IA/Skills.md` y dime si conviene actualizar esa skill.
 - Proyecto nuevo → nota en su área con las 4 propiedades y una línea en `Inicio.md`.
 
