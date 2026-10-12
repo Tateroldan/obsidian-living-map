@@ -86,6 +86,27 @@ const gauss = () => (Math.random()+Math.random()+Math.random()-1.5)/1.5;
 var DECISIONES = "Decisiones pendientes"; // nota de casillas abiertas (la manda /graph)
 var VAULT = "Boveda"; // nombre de la bóveda para obsidian:// (lo manda /graph)
 const MAX_POLVO = 8000, MAX_ANIM = 12, MAX_ETIQ = 40;
+// ---- tejido: una nota nueva nace donde la araña llega y esta la une a sus vecinas con hilos
+const HILO_MS = 700, HILO_GAP = 420, MAX_HILOS = 10, NACE_MS = 900;
+const hilos = [], tejiendo = new Map();           // tejiendo: "a|b" -> hilo (oculta la arista normal mientras crece)
+const llaveHilo = (a, b) => a + "|" + b;
+function tejer(n){
+  const sp = principal, now = performance.now();
+  const d = Math.hypot(n.x - sp.x, n.y - sp.y, n.z - sp.z);
+  const llega = now + ANTICIPA + (d < 8 ? 500 : Math.min(VIAJE_MAX, Math.max(VIAJE_MIN, d/VEL)));
+  n.nace = llega - 150;                            // invisible hasta que la araña llega
+  crawlTo(n, "write", n.title, false, null);
+  (adj[n.id] || []).slice(0, MAX_HILOS).forEach((m, i) => {
+    const h = {a: n, b: m, ini: llega + 200 + i*HILO_GAP, dur: HILO_MS, fin: false};
+    hilos.push(h); tejiendo.set(llaveHilo(n.id, m.id), h); tejiendo.set(llaveHilo(m.id, n.id), h); });
+}
+// pide el grafo ya (no esperar los 30 s) cuando Claude escribe una nota que aún no existe
+function refrescarGrafo(){
+  if (refrescarGrafo.p) return; refrescarGrafo.p = true;
+  setTimeout(() => loadGraph(false).catch(() => {}), 700);
+  setTimeout(() => { refrescarGrafo.p = false; loadGraph(false).catch(() => {}); }, 2800);
+}
+
 let firmaG = null;
 async function loadGraph(first){
   const g = await (await fetch("/graph")).json();
@@ -102,8 +123,16 @@ async function loadGraph(first){
   areas.forEach((a,i) => { // esfera de Fibonacci: cada área en su lugar del espacio
     const y = 1 - (i + .5)/k*2, r = Math.sqrt(1 - y*y), th = i * 2.399963;
     anchors[a] = {x: Math.cos(th)*r*R, y: y*R*.75, z: Math.sin(th)*r*R}; });
+  const hayViejos = !first && Object.keys(old).length > 0, nuevas = [], vecinas = {};
+  if (hayViejos) for (const l of g.links) { // vecinas ya existentes de cada nota nueva
+    if (!old[l.source] && old[l.target]) (vecinas[l.source] = vecinas[l.source] || []).push(old[l.target]);
+    if (!old[l.target] && old[l.source]) (vecinas[l.target] = vecinas[l.target] || []).push(old[l.source]); }
   nodes = g.nodes.map(n => { const o = old[n.id], an = anchors[n.area], spread = 25 + Math.sqrt(cnt[n.area])*9;
     if (o) return Object.assign(o, n, {vx:0, vy:0, vz:0}); // mismo objeto: las arañas no se quedan apuntando a nodos viejos
+    const v = vecinas[n.id];
+    if (hayViejos) nuevas.push(n);
+    if (v && v.length) { const c = {x: 0, y: 0, z: 0}; v.forEach(m => { c.x += m.x; c.y += m.y; c.z += m.z; });
+      return Object.assign(n, {x: c.x/v.length + gauss()*14, y: c.y/v.length + gauss()*14, z: c.z/v.length + gauss()*14, glow: 0}); }
     return Object.assign(n, {x: an.x + gauss()*spread, y: an.y + gauss()*spread, z: an.z + gauss()*spread, glow: 0}); });
   nodes.forEach(n => { byId[n.id] = n; adj[n.id] = []; });
   links = g.links.filter(l => byId[l.source] && byId[l.target]).map(l => ({source: byId[l.source], target: byId[l.target], heat: 0}));
@@ -128,6 +157,7 @@ async function loadGraph(first){
   const w = $("wait"); w.style.display = nodes.length ? "none" : "flex";
   if (!nodes.length) { w.dataset.i18n = "vacia"; w.textContent = t("vacia"); }
   arrancarArana();
+  nuevas.slice(0, 4).forEach((n, i) => setTimeout(() => tejer(n), i*1500)); // varias a la vez: una tras otra
 }
 function arrancarArana(){
   if (principal.node || !nodes.length) return;
@@ -151,6 +181,7 @@ function quien(e){ const k = e.agente || e.session || ""; return k ? {k, tag: e.
 function handle(e, ghost, mudo){ // mudo: se cuenta en el feed pero la araña no camina
   let n = byId[e.id]; const q = ghost ? null : quien(e);
   const v = verbOf(e);
+  if (!n && !ghost && v === "write" && e.id && !refrescarGrafo.p) refrescarGrafo();
   if (!n) {
     const pref = (e.id || "").split("/")[0];
     const inArea = nodes.filter(x => x.id.startsWith(pref + "/") || x.folder === pref);
@@ -281,10 +312,24 @@ function dibujar(now){
     const g = d.n.glow, sz = (1 + g) * Math.max(.6, p.s*.9);
     cx.fillStyle = col(d.n.area); cx.globalAlpha = Math.min(1, (.09 + d.z*.13 + g*.3) * boost) * depthA(p); cx.fillRect(p.x, p.y, sz, sz); }
   for (const l of links) { l.heat *= .985; const a = proj(l.source.x, l.source.y, l.source.z), b = proj(l.target.x, l.target.y, l.target.z); if (!a || !b) continue;
+    { const h = tejiendo.size && tejiendo.get(llaveHilo(l.source.id, l.target.id)); if (h && now < h.ini + h.dur) continue; } // la dibuja el tejido
     cx.strokeStyle = TEMA.arista; cx.globalAlpha = Math.min(.35, (.045 + l.heat*.06) * (claro ? 2 : 1)) * Math.min(depthA(a), depthA(b)); cx.lineWidth = 1;
     cx.beginPath(); cx.moveTo(a.x, a.y); cx.lineTo(b.x, b.y); cx.stroke(); }
+  // hilos de seda: crecen desde la nota nueva hacia cada vecina y al llegar la hacen brillar
+  for (let i = hilos.length - 1; i >= 0; i--) { const h = hilos[i];
+    if (now < h.ini) continue;
+    const u = clamp01((now - h.ini)/h.dur), e = smooth(u), A = proj(h.a.x, h.a.y, h.a.z), B = proj(h.b.x, h.b.y, h.b.z);
+    if (u >= 1) { if (!h.fin) { h.fin = true; h.b.glow = Math.max(h.b.glow, 1); h.a.glow = Math.max(h.a.glow, .8); }
+      tejiendo.delete(llaveHilo(h.a.id, h.b.id)); tejiendo.delete(llaveHilo(h.b.id, h.a.id)); hilos.splice(i, 1); continue; }
+    if (!A || !B) continue;
+    const x = A.x + (B.x - A.x)*e, y = A.y + (B.y - A.y)*e, da = Math.min(depthA(A), depthA(B));
+    cx.strokeStyle = vc("write"); cx.lineWidth = 1.6; cx.globalAlpha = .85*da; cx.beginPath(); cx.moveTo(A.x, A.y); cx.lineTo(x, y); cx.stroke();
+    cx.fillStyle = "#ffffff"; cx.globalAlpha = .9*da; cx.beginPath(); cx.arc(x, y, 2.4, 0, 7); cx.fill(); // chispa en la punta
+    cx.fillStyle = vc("write"); cx.globalAlpha = .25*da; cx.beginPath(); cx.arc(x, y, 7, 0, 7); cx.fill(); }
   for (const n of nodes) { n.glow *= .992; const p = n._p = proj(n.x, n.y, n.z); if (!p) continue;
-    const c = col(n.area), r = (1.6 + Math.min(3, n.words/400) + n.glow*2.5) * p.s, da = depthA(p);
+    let nk = 1; if (n.nace) { if (now < n.nace) continue; nk = clamp01((now - n.nace)/NACE_MS); if (nk >= 1) n.nace = 0; } // nace: aparece al llegar la araña
+    const c = col(n.area), r = (1.6 + Math.min(3, n.words/400) + n.glow*2.5) * p.s * (nk < 1 ? .25 + .75*smooth(nk) : 1), da = depthA(p);
+    if (nk < 1) { cx.strokeStyle = vc("write"); cx.lineWidth = 1.4; cx.globalAlpha = (1 - nk)*.8*da; cx.beginPath(); cx.arc(p.x, p.y, r + 4 + nk*34*p.s, 0, 7); cx.stroke(); } // onda de nacimiento
     const sal = window.SALUD && SALUD.on, dim = sal && SALUD.nunca.has(n.id) ? .3 : 1;
     if (!claro) { cx.globalAlpha = (.06 + n.glow*.2) * da * dim; cx.fillStyle = c; cx.beginPath(); cx.arc(p.x, p.y, r*2.4 + 3, 0, 7); cx.fill(); } // halo del color del área
     cx.globalAlpha = (.55 + n.glow*.45) * da * dim; cx.fillStyle = visited.has(n.id) ? c : TEMA.nodo; cx.beginPath(); cx.arc(p.x, p.y, r, 0, 7); cx.fill();
