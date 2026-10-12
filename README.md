@@ -1,50 +1,52 @@
 # Obsidian Living Map
 
-Mapa 3D de tu bóveda de Obsidian donde una araña camina por las notas que Claude Code lee (cian), escribe (ámbar) o busca (violeta). No gasta tokens: un hook `PostToolUse` anota cada acceso en `events.jsonl` y la página lo consulta cada 0.8 s. Solo Python estándar, sin `pip install`.
+English · [Español](README.es.md) · [Português](README.pt.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [中文](README.zh.md)
 
-## Instalar
+3D map of your Obsidian vault where a spider walks the notes that Claude Code reads (cyan), writes (amber) or searches (violet). It costs no tokens: a `PostToolUse` hook logs every access to `events.jsonl` and the page polls it every 0.8 s. Python standard library only, no `pip install`.
 
-1. Clona el repo y abre `abrir.cmd` (o `python server.py --abrir`). Se abre http://127.0.0.1:8765.
-2. Si tu bóveda no está en `~/Documents/Boveda`, define `MAPA_BOVEDA` con su ruta. El puerto se cambia con `MAPA_PUERTO` y la nota de casillas abiertas con `MAPA_DECISIONES`. Todo vive en `config.py`.
-   Para `validar.py`, copia `reglas.ejemplo.json` a `reglas.json` y ajusta tipos, áreas y estados a tu bóveda (`reglas.json` no se sube).
-3. Para ver a Claude moverse, agrega los hooks a `~/.claude/settings.json`:
+## Install
+
+1. Clone the repo and open `abrir.cmd` (or run `python server.py --abrir`). It opens http://127.0.0.1:8765.
+2. If your vault is not at `~/Documents/Boveda`, set `MAPA_BOVEDA` to its path. Change the port with `MAPA_PUERTO` and the note with open checkboxes with `MAPA_DECISIONES`. Everything lives in `config.py`.
+   For `validar.py`, copy `reglas.ejemplo.json` to `reglas.json` and adjust types, areas and states to your vault (`reglas.json` is not committed).
+3. To watch Claude move, add the hook to `~/.claude/settings.json`:
 
 ```json
 {
   "hooks": {
     "PostToolUse": [
       { "matcher": "Read|Write|Edit|Grep|Glob|Bash|PowerShell",
-        "hooks": [{ "type": "command", "command": "python \"RUTA/mapa-vivo/hook.py\"" }] }
+        "hooks": [{ "type": "command", "command": "python \"PATH/obsidian-living-map/hook.py\"" }] }
     ]
   }
 }
 ```
 
-Opcionales: `validar.py` (PostToolUse `Write|Edit`, avisa de propiedades faltantes, enlaces rotos o secretos pegados) y `diario.py` (SessionEnd, resume la sesión en la nota diaria).
+Optional: `validar.py` (PostToolUse `Write|Edit`; warns about missing properties, broken links or pasted secrets) and `diario.py` (SessionEnd; summarizes the session in the daily note).
 
-## Piezas
+## Parts
 
-| Archivo | Para qué |
+| File | Purpose |
 |---|---|
-| `reglas.ejemplo.json` | reglas de `validar.py` (propiedades permitidas, mezclas prohibidas) |
-| `config.py` | ruta de la bóveda, puerto y log (único lugar con rutas) |
-| `server.py` | servidor local; solo sirve la página y sus piezas, revisa `Host` |
+| `reglas.ejemplo.json` | rules for `validar.py` (allowed properties, forbidden mixes) |
+| `config.py` | vault path, port and log (the only place with paths) |
+| `server.py` | local server; serves only the page and its pieces, checks `Host` |
 | `hook.py` | PostToolUse → `events.jsonl` |
-| `salud.py` | huérfanas y notas nunca tocadas |
-| `validar.py`, `vecinos.py`, `diario.py` | validar al escribir, vecinos/camino/tema, diario automático |
-| `mapa3d.js`, `crawler.js`, `tema.js`, `idioma.js`, `paneles.js` | cámara y grafo, araña con IK, 6 paletas, 8 idiomas, paneles |
+| `salud.py` | orphan notes and never-touched notes |
+| `validar.py`, `vecinos.py`, `diario.py` | validate on write, neighbors/path/topic, automatic daily note |
+| `mapa3d.js`, `crawler.js`, `tema.js`, `idioma.js`, `paneles.js` | camera and graph, spider with IK, 6 palettes, 8 languages, panels |
 
-Parámetros de URL: `?tema=rgb&lang=en`. Clic en una nota la abre en Obsidian; doble clic la enfoca.
+URL parameters: `?tema=rgb&lang=en`. Click a note to open it in Obsidian; double-click to focus it.
 
-## Privacidad
+## Privacy
 
-Todo corre en `127.0.0.1`. `events.jsonl` guarda rutas de tus notas; está en `.gitignore`.
+Everything runs on `127.0.0.1`. `events.jsonl` stores your note paths; it is in `.gitignore`.
 
-## Licencias de terceros
+## Third-party licenses
 
-- d3 7.9.0 (ISC), en `vendor/`.
-- Departure Mono v1.500 (SIL OFL), en `fuentes/`.
+- d3 7.9.0 (ISC), `vendor/`
+- Departure Mono v1.500 (SIL OFL), `fuentes/`
 
-## Licencia
+## License
 
-Apache-2.0, ver `LICENSE`.
+Apache-2.0, see `LICENSE`.
