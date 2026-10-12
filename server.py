@@ -4,7 +4,7 @@ from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 import salud
 from config import AQUI, BOVEDA, PUERTO, LOG, OMITIR, DECISIONES
-from reglas import V
+from reglas import V, M
 
 LINK = re.compile(r"\[\[([^\]|#^]+)")
 # solo se sirve la pagina y sus piezas: ni events.jsonl ni los .py salen por HTTP
@@ -162,11 +162,11 @@ if __name__ == "__main__":
     try:
         srv = ThreadingHTTPServer(("127.0.0.1", PUERTO), H)
     except OSError:  # puerto ocupado: casi siempre es el mapa que ya estaba abierto
-        print("El puerto %d ya está en uso; abro el mapa que ya corre." % PUERTO)
+        print(M["srv_ocupado"].format(p=PUERTO))
         if "--abrir" in sys.argv:
             webbrowser.open(url)
         sys.exit(0)
-    print("Mapa vivo en %s  (Ctrl+C para cerrar)" % url)
+    print(M["srv_listo"].format(u=url))
     if "--abrir" in sys.argv:  # el navegador se abre cuando el servidor ya escucha
         webbrowser.open(url)
     try:

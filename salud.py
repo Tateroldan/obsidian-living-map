@@ -98,4 +98,4 @@ def escribir():
 
 if __name__ == "__main__":
     r, d = escribir()
-    print(r, "|", d["total"], "notas,", len(d["huerfanas"]), "huérfanas,", len(d["nunca"]), "nunca tocadas")
+    print(M["s_cli"].format(r=r, t=d["total"], h=len(d["huerfanas"]), n=len(d["nunca"])))

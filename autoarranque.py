@@ -7,6 +7,7 @@ preferencias.json (no se sube). Después se cambia con:
 import json, os, subprocess, sys
 
 from config import AQUI
+from reglas import M
 
 PREFS = os.path.join(AQUI, "preferencias.json")
 NOMBRE_VBS = "obsidian-living-map.vbs"
@@ -65,15 +66,14 @@ def preguntar_primera_vez():
     if os.name != "nt" or "autoarranque" in _leer() or not sys.stdin or not sys.stdin.isatty():
         return
     try:
-        r = input("¿Abrir el mapa vivo automáticamente al iniciar Windows? (s/n, se puede cambiar después): ").strip().lower()
+        r = input(M["aa_pregunta"]).strip().lower()
     except EOFError:
         return
-    si = r[:1] in ("s", "y")
+    si = r[:1] in tuple(M["aa_si_letras"])
     _guardar({**_leer(), "autoarranque": si})
     if si:
         activar()
-    print("Listo. Para cambiarlo: python server.py --autoarranque on|off" if si else
-          "De acuerdo, no se activa. Para activarlo luego: python server.py --autoarranque on")
+    print(M["aa_si_ok"] if si else M["aa_no_ok"])
 
 
 def comando(arg):
@@ -82,9 +82,9 @@ def comando(arg):
         ok = activar()
         if ok:
             _guardar({**_leer(), "autoarranque": True})
-        return "Arranque automático activado." if ok else "Solo disponible en Windows."
+        return M["aa_on"] if ok else M["aa_solo_win"]
     if arg == "off":
         desactivar()
         _guardar({**_leer(), "autoarranque": False})
-        return "Arranque automático desactivado."
-    return "Arranque automático: %s" % ("activado" if activo() else "desactivado")
+        return M["aa_off"]
+    return M["aa_estado"].format(e=M["aa_activado"] if activo() else M["aa_desactivado"])
