@@ -12,11 +12,13 @@ V_POR_IDIOMA = {
     "es": dict(tipo="tipo", area="area", estado="estado", creado="creado", aprendizaje="aprendizaje",
                activo="activo", diario="diario", proyecto="proyecto", sistema="sistema",
                bandeja="00 Bandeja", diario_dir="00 Diario", aprendizajes="Aprendizajes", inicio="Inicio",
-               conecta="Conecta con:", salud="_Sistema/Salud de la bóveda", decisiones="Decisiones pendientes"),
+               conecta="Conecta con:", salud="_Sistema/Salud de la bóveda", decisiones="Decisiones pendientes",
+               estado_claude="Estado para Claude"),
     "en": dict(tipo="type", area="area", estado="status", creado="created", aprendizaje="learning",
                activo="active", diario="daily", proyecto="project", sistema="system",
                bandeja="00 Inbox", diario_dir="00 Daily", aprendizajes="Learnings", inicio="Home",
-               conecta="Connects with:", salud="_System/Vault health", decisiones="Open decisions"),
+               conecta="Connects with:", salud="_System/Vault health", decisiones="Open decisions",
+               estado_claude="State for Claude"),
 }
 
 MSG = {
@@ -90,7 +92,8 @@ SENALES = {
 
 
 def cargar():
-    for nombre in ("reglas.json", "reglas.ejemplo.json"):
+    candidatos = [os.environ["MAPA_REGLAS"]] if os.environ.get("MAPA_REGLAS") else []  # override útil en pruebas
+    for nombre in candidatos + ["reglas.json", "reglas.ejemplo.json"]:
         try:
             with open(os.path.join(AQUI, nombre), encoding="utf-8") as f:
                 return json.load(f)

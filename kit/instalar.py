@@ -70,7 +70,8 @@ def preguntar(texto, auto, t):
 
 
 def sustituir(texto, boveda):
-    return texto.replace("{{BOVEDA}}", str(boveda).replace("\\", "/")).replace("{{HOY}}", date.today().isoformat())
+    return (texto.replace("{{BOVEDA}}", str(boveda).replace("\\", "/")).replace("{{HOY}}", date.today().isoformat())
+            .replace("{{REPO}}", str(RAIZ).replace("\\", "/")))
 
 
 def copiar_arbol(origen, destino, boveda, simulacro, sustituir_marcas=True):

@@ -6,8 +6,8 @@ My brain is the Obsidian vault `{{BOVEDA}}`. Everything we do grows there, conne
 **Neural set** = the whole system: the notes in `Learnings/` linked to each other (**Connects with:**) plus the skills and agents that feed on them (index in `AI/Skills.md`). If I say "connect the neural set", open `Home.md`, the project note and `AI/Skills.md`, and search for the learnings on the topic.
 
 ## When starting
-- Don't read the whole vault. If the task touches one of my projects, open `Home.md` (index) and from there only the project note and its "State for Claude".
-- Before giving an opinion on a topic, search learnings with Grep in `Learnings/` (by word or by `area:`). Read only the ones that apply.
+- **Start with a single call:** `python {{REPO}}/kit/contexto.py "<project and task keywords>"` prints the project state and the related learnings (no tokens). Don't read the whole vault or open the index if that is enough; open a full note only when you need more detail.
+- If the script doesn't find the project, open `Home.md` and from there only the project note and its "State for Claude"; before giving an opinion, search learnings with Grep in `Learnings/`.
 - **Before editing a project's code:** open `Home.md` → project note → "State for Claude" and confirm that the folder you are about to edit is the one the note says (the session folder is NOT proof). If it doesn't match, say so and ask before touching anything.
 - Vault rules: `_System/How this vault works.md` (only if you are going to write and don't know them).
 
@@ -17,6 +17,7 @@ My brain is the Obsidian vault `{{BOVEDA}}`. Everything we do grows there, conne
 - If the task produced a technique, a gotcha or a decision you would apply in another project, create a short learning in `Learnings/` that links to others with **Connects with:**. When in doubt, create it: one line is enough and you don't need to ask first. Link it to at least one existing learning (not only the project) and add it to `Learnings.md`. Never overwrite a learning: new note with "supersedes [[...]]".
 - If the learning touches the topic of a skill, add it to its line in `AI/Skills.md` and tell me whether that skill should be updated.
 - New project → note in its area with the 4 properties and a line in `Home.md`.
+- **Do all the closing writes (state, learning, indexes) in ONE message, with parallel tool calls:** every extra turn re-reads the whole context and costs.
 
 ## Way of working
 - Ask, don't guess: if a missing fact changes the result, ask (on big jobs: up to 7 questions, ordered by impact and with options, before writing code).

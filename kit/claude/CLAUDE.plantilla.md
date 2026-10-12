@@ -6,8 +6,8 @@ Mi cerebro es la bóveda de Obsidian `{{BOVEDA}}`. Todo lo que hacemos crece ah�
 **Conjunto neuronal** = el sistema completo: las neuronas de `Aprendizajes/` enlazadas entre sí (**Conecta con:**) más las skills y agentes que se alimentan de ellas (índice en `IA/Skills.md`). Si digo «conecta el conjunto neuronal», abre `Inicio.md`, la nota del proyecto y `IA/Skills.md`, y busca las neuronas del tema.
 
 ## Al empezar
-- No leas la bóveda entera. Si la tarea toca un proyecto mío, abre `Inicio.md` (índice) y de ahí solo la nota del proyecto y su «Estado para Claude».
-- Antes de opinar sobre un tema, busca neuronas con Grep en `Aprendizajes/` (por palabra o por `area:`). Lee solo las que apliquen.
+- **Empieza con una sola llamada:** `python {{REPO}}/kit/contexto.py "<proyecto y palabras clave de la tarea>"` imprime el estado del proyecto y las neuronas relacionadas (sin tokens). No leas la bóveda entera ni abras el índice si eso ya basta; abre una nota completa solo si necesitas más detalle.
+- Si el script no encuentra el proyecto, abre `Inicio.md` y de ahí solo la nota del proyecto y su «Estado para Claude»; antes de opinar busca neuronas con Grep en `Aprendizajes/`.
 - **Antes de editar código de un proyecto mío:** abre `Inicio.md` → nota del proyecto → «Estado para Claude» y confirma que la carpeta donde vas a editar es la que dice la nota (la carpeta de la sesión NO es prueba). Si no coincide, avisa y pregunta antes de tocar nada.
 - Reglas de la bóveda: `_Sistema/Cómo funciona esta bóveda.md` (solo si vas a escribir y no las conoces).
 
@@ -17,6 +17,7 @@ Mi cerebro es la bóveda de Obsidian `{{BOVEDA}}`. Todo lo que hacemos crece ah�
 - Si la tarea produjo una técnica, una trampa o una decisión que aplicarías en otro proyecto, crea una neurona corta en `Aprendizajes/` que enlace a otras con **Conecta con:**. Ante la duda, créala: una línea basta y no hace falta preguntar antes. Enlázala con al menos una neurona existente (no solo con el proyecto) y agrégala a `Aprendizajes.md`. Nunca sobrescribas una neurona: nota nueva con «reemplaza a [[...]]».
 - Si la neurona toca el tema de una skill, agrégala a su línea en `IA/Skills.md` y dime si conviene actualizar esa skill.
 - Proyecto nuevo → nota en su área con las 4 propiedades y una línea en `Inicio.md`.
+- **Haz todas las escrituras del cierre (estado, neurona, índices) en UN solo mensaje, con llamadas a herramientas en paralelo:** cada turno extra relee todo el contexto y cuesta.
 
 ## Forma de trabajar
 - Pregunta, no adivines: si falta un dato que cambia el resultado, pregúntalo (en trabajo grande: hasta 7 preguntas, ordenadas por impacto y con opciones, antes de escribir código).

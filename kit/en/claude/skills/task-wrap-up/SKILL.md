@@ -8,6 +8,7 @@ description: Wraps up a task in the Obsidian vault - updates the project's "Stat
 Do it without being asked, at the end of every task. It should take a minute, not a session.
 
 ## Steps
+Do the writes of steps 1-4 in a single message, with parallel tool calls: every extra turn costs.
 1. **State for Claude.** Open the project note (from `Home.md`) and update its "State for Claude" section (≤10 lines): date, where we left off, next step, key files. If alternatives were discarded, add "Discarded and why" with one line each.
 2. **Learning.** Ask yourself: was there a technique, a gotcha or a decision you would apply in another project? When in doubt, yes: create the learning without asking (one line is enough). Search `Learnings/` with Grep for a similar one. If it exists, link to it or create one that extends it; if not, create a new one with the `Learning` template (one idea, 3-6 lines, ends with **Connects with:**). Never overwrite: new note with "supersedes [[...]]".
 3. **Skills index.** If the learning touches the topic of a skill, add it to its "Fed by" line in `AI/Skills.md` and say whether the skill should be updated.
