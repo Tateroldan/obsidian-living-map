@@ -46,7 +46,7 @@ Alles läuft auf `127.0.0.1`. `events.jsonl` speichert die Pfade deiner Notizen;
 
 ## Kit (der selbstlernende Teil)
 
-Die Karte zeigt, was Claude berührt; `kit/` gibt Claude die Arbeitsweise, mit der der Vault von selbst wächst: Regeln für Beginn und Abschluss von Aufgaben, verknüpfte Notizen („Neuronen“), ein Bibliothekar-Agent, ein Posteingangs-Router ohne Tokens, eine Abschluss-Skill und ein Beispiel-Vault. Keine persönlichen Notizen sind enthalten. Vorschau mit `python kit/instalar.py --simulacro`. Details: [kit/LEEME.md](kit/LEEME.md).
+Die Karte zeigt, was Claude berührt; `kit/` gibt Claude die Arbeitsweise, mit der der Vault von selbst wächst: Regeln für Beginn und Abschluss von Aufgaben, verknüpfte Notizen („Neuronen“), ein Bibliothekar-Agent, ein Posteingangs-Router ohne Tokens, eine Abschluss-Skill und ein Beispiel-Vault. Keine persönlichen Notizen sind enthalten. Vorschau mit `python kit/instalar.py --simulacro` (`--lang en` / `--lang es`). Details: [kit/README.md](kit/README.md).
 
 ## Unterstützung
 

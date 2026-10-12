@@ -46,7 +46,7 @@ Tutto gira su `127.0.0.1`. `events.jsonl` contiene i percorsi delle tue note; è
 
 ## Kit (la parte autodidatta)
 
-La mappa mostra cosa tocca Claude; `kit/` gli dà il metodo di lavoro che fa crescere il vault da solo: regole per iniziare e chiudere i compiti, note collegate («neuroni»), un agente bibliotecario, un router della casella senza token, una skill di chiusura e un vault di esempio. Nessuna nota personale inclusa. Anteprima con `python kit/instalar.py --simulacro`. Dettagli: [kit/LEEME.md](kit/LEEME.md).
+La mappa mostra cosa tocca Claude; `kit/` gli dà il metodo di lavoro che fa crescere il vault da solo: regole per iniziare e chiudere i compiti, note collegate («neuroni»), un agente bibliotecario, un router della casella senza token, una skill di chiusura e un vault di esempio. Nessuna nota personale inclusa. Anteprima con `python kit/instalar.py --simulacro` (`--lang en` / `--lang es`). Dettagli: [kit/README.md](kit/README.md).
 
 ## Supporto
 

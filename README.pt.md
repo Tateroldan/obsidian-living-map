@@ -46,7 +46,7 @@ Tudo roda em `127.0.0.1`. `events.jsonl` guarda os caminhos das suas notas; est�
 
 ## Kit (a parte autodidata)
 
-O mapa mostra o que o Claude toca; `kit/` dá ao Claude o método de trabalho que faz o cofre crescer sozinho: regras para começar e terminar tarefas, notas ligadas («neurônios»), um agente bibliotecário, um roteador de caixa de entrada sem tokens, uma skill de encerramento e um cofre de exemplo. Não inclui notas pessoais de ninguém. Prévia com `python kit/instalar.py --simulacro`. Detalhes: [kit/LEEME.md](kit/LEEME.md).
+O mapa mostra o que o Claude toca; `kit/` dá ao Claude o método de trabalho que faz o cofre crescer sozinho: regras para começar e terminar tarefas, notas ligadas («neurônios»), um agente bibliotecário, um roteador de caixa de entrada sem tokens, uma skill de encerramento e um cofre de exemplo. Não inclui notas pessoais de ninguém. Prévia com `python kit/instalar.py --simulacro` (`--lang en` / `--lang es`). Detalhes: [kit/README.md](kit/README.md).
 
 ## Apoio
 

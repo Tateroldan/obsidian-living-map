@@ -7,6 +7,7 @@ from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from config import BOVEDA, LOG as EVENTOS
+from reglas import V, M
 CODIGO = (".py", ".js", ".ts", ".html", ".css", ".json", ".pyw", ".cmd", ".ps1")
 
 
@@ -73,20 +74,20 @@ def construir(sid, cwd, eventos):
     ts = [e["t"] for e in eventos if isinstance(e.get("t"), (int, float))]
     hm = lambda t: datetime.fromtimestamp(t).strftime("%H:%M")
     h1, h2 = (hm(min(ts)), hm(max(ts))) if ts else ("??:??", "??:??")
-    proyecto = os.path.basename(norm(cwd)) or "(desconocido)"
+    proyecto = os.path.basename(norm(cwd)) or M["desconocido"]
     codigo = [os.path.basename(norm(e.get("path"))) for e in eventos
               if e.get("verb") == "write" and norm(e.get("path")).lower().endswith(CODIGO)
               and not norm(e.get("path")).lower().startswith(norm(BOVEDA).lower())]
-    L = ["## Sesión %s–%s (auto)" % (h1, h2), "<!-- sesion:%s -->" % sid,
-         "- Proyecto: %s" % proyecto]
+    L = ["## %s %s–%s (auto)" % (M["sesion"], h1, h2), "<!-- sesion:%s -->" % sid,
+         "- %s: %s" % (M["proyecto"], proyecto)]
     if leidas:
-        L.append("- Notas leídas: " + lista(leidas))
+        L.append("- %s: " % M["leidas"] + lista(leidas))
     if escritas:
-        L.append("- Notas escritas: " + lista(escritas))
+        L.append("- %s: " % M["escritas"] + lista(escritas))
     if busq:
-        L.append("- Búsquedas: " + lista(busq))
+        L.append("- %s: " % M["busquedas"] + lista(busq))
     if codigo:
-        L.append("- Código tocado: " + lista(["`%s`" % c for c in codigo]))
+        L.append("- %s: " % M["codigo"] + lista(["`%s`" % c for c in codigo]))
     return "\n".join(L) + "\n"
 
 
@@ -95,7 +96,7 @@ def escribir(ruta, hoy, sid, bloque):
         with open(ruta, encoding="utf-8") as f:
             txt = f.read()
     else:
-        txt = "---\ntipo: diario\narea: personal\nestado: activo\ncreado: %s\n---\n# %s\n" % (hoy, hoy)
+        txt = "---\n%s: %s\n%s: personal\n%s: %s\n%s: %s\n---\n# %s\n" % (V["tipo"], V["diario"], V["area"], V["estado"], V["activo"], V["creado"], hoy, hoy)
     marca = "<!-- sesion:%s -->" % sid
     i = txt.find(marca)
     if i >= 0:
@@ -129,7 +130,7 @@ def main():
     if not bloque:
         return
     hoy = datetime.now().strftime("%Y-%m-%d")
-    ruta = os.path.join(BOVEDA, "00 Diario", hoy + ".md")
+    ruta = os.path.join(BOVEDA, V["diario_dir"], hoy + ".md")
     if "--prueba" in sys.argv:
         destino = sys.argv[sys.argv.index("--prueba") + 1]
         if os.path.exists(ruta) and not os.path.exists(destino):

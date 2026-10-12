@@ -8,12 +8,14 @@ Variables de entorno (opcionales):
 """
 import os
 
+from reglas import V
+
 AQUI = os.path.dirname(os.path.abspath(__file__))
 BOVEDA = os.path.abspath(os.environ.get("MAPA_BOVEDA") or os.path.join(os.path.expanduser("~"), "Documents", "Boveda"))
 PUERTO = int(os.environ.get("MAPA_PUERTO") or 8765)
 LOG = os.path.abspath(os.environ.get("MAPA_LOG") or os.path.join(AQUI, "events.jsonl"))
 OMITIR = {".obsidian", "Adjuntos", ".trash"}
-DECISIONES = os.environ.get("MAPA_DECISIONES") or "Decisiones pendientes"  # nota con casillas - [ ]
+DECISIONES = os.environ.get("MAPA_DECISIONES") or V["decisiones"]  # nota con casillas - [ ]
 
 NOMBRE = os.path.basename(BOVEDA)  # nombre de la bóveda para obsidian://
 # fragmento «carpeta-padre/bóveda» en minúsculas con «/»: así el hook reconoce rutas dentro de comandos

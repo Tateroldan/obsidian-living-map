@@ -46,7 +46,7 @@ Everything runs on `127.0.0.1`. `events.jsonl` stores your note paths; it is in 
 
 ## Kit (the self-learning part)
 
-The map shows what Claude touches; `kit/` gives Claude the working method that makes the vault grow on its own: rules for starting and finishing tasks, linked notes ("neurons"), a librarian agent, a zero-token inbox router, a closing skill and a sample vault. No one's personal notes are included. Preview with `python kit/instalar.py --simulacro`. Details: [kit/LEEME.md](kit/LEEME.md).
+The map shows what Claude touches; `kit/` gives Claude the working method that makes the vault grow on its own: rules for starting and finishing tasks, linked notes ("neurons"), a librarian agent, a zero-token inbox router, a closing skill and a sample vault. No one's personal notes are included. Preview with `python kit/instalar.py --simulacro` (`--lang en` / `--lang es`). Details: [kit/README.md](kit/README.md).
 
 ## Support
 

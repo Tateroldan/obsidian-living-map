@@ -19,6 +19,7 @@ El mapa vivo muestra qué toca Claude; este kit le da a Claude **la forma de tra
 ```
 python kit/instalar.py --simulacro     # ver qué haría, sin escribir nada
 python kit/instalar.py                 # paso a paso, pregunta antes de cada grupo
+python kit/instalar.py --lang en       # kit en inglés (carpetas, propiedades y mensajes en inglés)
 ```
 
 - La bóveda de ejemplo se crea en `MAPA_BOVEDA` (o `~/Documents/Boveda`). Si la carpeta ya tiene notas, solo se agregan los archivos que falten.

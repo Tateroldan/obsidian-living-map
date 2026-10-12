@@ -1,0 +1,21 @@
+{
+  "idioma": "en",
+  "tipos": ["learning", "prompt", "project", "plan", "guide", "script", "index", "daily"],
+  "areas": ["work", "personal", "projects", "ideas", "ai", "system"],
+  "estados": ["active", "idea", "done", "superseded", "archived"],
+  "max_lineas": 400,
+  "omitir": [".obsidian", "Attachments", ".trash", "Templates"],
+  "exentas": [],
+  "no_mezclar": [],
+  "router": {
+    "umbral": 0.85,
+    "no_mezclar": [],
+    "areas": {
+      "work": {"carpeta": "Work", "palabras": ["client", "meeting", "invoice", "quote", "budget", "price", "payment"]},
+      "personal": {"carpeta": "Personal", "palabras": ["family", "health", "trip", "shopping", "birthday", "appointment"]},
+      "projects": {"carpeta": "Projects", "palabras": ["project", "roadmap", "delivery", "sprint", "newsletter"]},
+      "ideas": {"carpeta": "Ideas", "palabras": ["idea", "what if", "maybe", "it occurred to me"]},
+      "ai": {"carpeta": "AI", "palabras": ["claude", "prompt", "agent", "model", "tokens", "skill", "obsidian", "mcp"]}
+    }
+  }
+}

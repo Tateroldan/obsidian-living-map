@@ -46,7 +46,7 @@ Todo corre en `127.0.0.1`. `events.jsonl` guarda rutas de tus notas; está en `.
 
 ## Kit (la parte autodidacta)
 
-El mapa muestra qué toca Claude; `kit/` le da a Claude la forma de trabajar que hace crecer la bóveda sola: reglas para empezar y terminar tareas, notas enlazadas («neuronas»), un agente bibliotecario, un router de bandeja sin tokens, una skill de cierre y una bóveda de ejemplo. No incluye notas personales de nadie. Vista previa con `python kit/instalar.py --simulacro`. Detalle: [kit/LEEME.md](kit/LEEME.md).
+El mapa muestra qué toca Claude; `kit/` le da a Claude la forma de trabajar que hace crecer la bóveda sola: reglas para empezar y terminar tareas, notas enlazadas («neuronas»), un agente bibliotecario, un router de bandeja sin tokens, una skill de cierre y una bóveda de ejemplo. No incluye notas personales de nadie. Vista previa con `python kit/instalar.py --simulacro` (`--lang en` / `--lang es`). Detalle: [kit/LEEME.md](kit/LEEME.md).
 
 ## Apoyo
 

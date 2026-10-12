@@ -83,6 +83,7 @@ const visited = new Set(); let stats = {read:0, write:0, search:0}, since = 0;
 const evTimes = [], feedItems = [], recentAreas = [];
 const gauss = () => (Math.random()+Math.random()+Math.random()-1.5)/1.5;
 
+var INICIO = "Inicio"; // nota donde arranca la araña (la manda /graph)
 var DECISIONES = "Decisiones pendientes"; // nota de casillas abiertas (la manda /graph)
 var VAULT = "Boveda"; // nombre de la bóveda para obsidian:// (lo manda /graph)
 const MAX_POLVO = 8000, MAX_ANIM = 12, MAX_ETIQ = 40;
@@ -112,6 +113,7 @@ async function loadGraph(first){
   const g = await (await fetch("/graph")).json();
   if (g.vault) VAULT = g.vault;
   if (g.decisiones) DECISIONES = g.decisiones;
+  if (g.inicio) INICIO = g.inicio;
   const sig = g.nodes.map(n => n.id + ":" + n.area).join("|") + "#" + g.links.map(l => l.source + ">" + l.target).sort().join("|");
   if (sig === firmaG) { for (const n of g.nodes) if (byId[n.id]) byId[n.id].words = n.words; return; } // nada cambió: ni simulación ni polvo se reinician
   firmaG = sig;
@@ -161,7 +163,7 @@ async function loadGraph(first){
 }
 function arrancarArana(){
   if (principal.node || !nodes.length) return;
-  const s = byId["Inicio"] || nodes[0]; principal.x = s.x; principal.y = s.y; principal.z = s.z;
+  const s = byId[INICIO] || nodes[0]; principal.x = s.x; principal.y = s.y; principal.z = s.z;
   crawlTo(s, "read");
 }
 

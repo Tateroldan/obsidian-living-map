@@ -5,6 +5,7 @@ mezclas de temas prohibidas (reglas.json) y llaves/secretos pegados. Idea tomada
 import json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from config import BOVEDA
+from reglas import V, M
 
 
 def _reglas():
@@ -60,39 +61,39 @@ def revisar(ruta):
     rel = os.path.relpath(ruta, BOVEDA).replace("\\", "/")
     if rel.startswith("..") or rel in EXENTAS or not rel.endswith(".md"):
         return []
-    if set(rel.split("/")[:-1]) & OMITIR or rel.startswith(("00 Diario/", "00 Bandeja/")):
+    if set(rel.split("/")[:-1]) & OMITIR or rel.startswith((V["diario_dir"] + "/", V["bandeja"] + "/")):
         return []
     txt = open(ruta, encoding="utf-8", errors="replace").read()
     props, cuerpo = propiedades(txt)
     p = []
     if not props:
-        p.append("sin propiedades (faltan tipo/area/estado/creado)")
+        p.append(M["sin_props"].format(k="/".join(V[x] for x in ("tipo", "area", "estado", "creado"))))
     else:
-        for k, vals in (("tipo", TIPOS), ("area", AREAS), ("estado", ESTADOS)):
+        for k, vals in ((V["tipo"], TIPOS), (V["area"], AREAS), (V["estado"], ESTADOS)):
             v = props.get(k)
             if not v:
-                p.append(f"falta `{k}`")
+                p.append(M["falta"].format(k=k))
             elif v not in vals:
-                p.append(f"`{k}: {v}` no es un valor permitido ({' · '.join(sorted(vals))})")
-        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", props.get("creado", "")):
-            p.append("`creado` debe ser AAAA-MM-DD")
+                p.append(M["valor"].format(k=k, v=v, lista=" · ".join(sorted(vals))))
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", props.get(V["creado"], "")):
+            p.append(M["fecha"].format(k=V["creado"]))
     enlaces = [e.strip().removesuffix(".md") for e in LINK.findall(cuerpo) if e.strip(" .")]   # [[...]] = ejemplo, no enlace
     if not enlaces:
-        p.append("no enlaza a ninguna nota (toda nota enlaza al menos a otra)")
+        p.append(M["sin_enlaces"])
     else:
         ok = nombres_existentes()
         rotos = sorted({e for e in enlaces if e.split("/")[-1].lower() not in ok})
         if rotos:
-            p.append("enlaces rotos: " + ", ".join(f"[[{r}]]" for r in rotos[:6]))
+            p.append(M["rotos"] + ", ".join(f"[[{r}]]" for r in rotos[:6]))
     n = txt.count("\n") + 1
     if n > MAX_LINEAS:
-        p.append(f"{n} líneas: divídela (tope {MAX_LINEAS})")
+        p.append(M["largo"].format(n=n, max=MAX_LINEAS))
     if SECRETOS.search(txt):
-        p.append("parece contener una llave/secreto: quítalo de la nota")
+        p.append(M["secreto"])
     for r in NO_MEZCLAR:
-        en_zona = props.get("area") == r.get("area") or (r.get("carpeta") and rel.startswith(r["carpeta"]))
+        en_zona = props.get(V["area"]) == r.get("area") or (r.get("carpeta") and rel.startswith(r["carpeta"]))
         if en_zona and re.search(r["prohibido"], cuerpo, re.I):
-            p.append(r.get("aviso", "mezcla de temas no permitida"))
+            p.append(r.get("aviso", M["mezcla"]))
     return p
 
 

@@ -46,7 +46,7 @@ URL 参数:`?tema=rgb&lang=zh`。单击笔记在 Obsidian 中打开,双击则聚
 
 ## 套件(自学习部分)
 
-地图展示 Claude 触及了什么;`kit/` 则赋予 Claude 让知识库自行生长的工作方法:任务开始与结束的规则、相互链接的笔记(“神经元”)、图书管理员代理、无需 token 的收件箱路由器、收尾技能和示例知识库。不包含任何人的个人笔记。可用 `python kit/instalar.py --simulacro` 预览。详情:[kit/LEEME.md](kit/LEEME.md)。
+地图展示 Claude 触及了什么;`kit/` 则赋予 Claude 让知识库自行生长的工作方法:任务开始与结束的规则、相互链接的笔记(“神经元”)、图书管理员代理、无需 token 的收件箱路由器、收尾技能和示例知识库。不包含任何人的个人笔记。可用 `python kit/instalar.py --simulacro` (`--lang en` / `--lang es`) 预览。详情:[kit/README.md](kit/README.md)。
 
 ## 支持
 

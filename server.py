@@ -4,6 +4,7 @@ from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 import salud
 from config import AQUI, BOVEDA, PUERTO, LOG, OMITIR, DECISIONES
+from reglas import V
 
 LINK = re.compile(r"\[\[([^\]|#^]+)")
 # solo se sirve la pagina y sus piezas: ni events.jsonl ni los .py salen por HTTP
@@ -63,7 +64,7 @@ def _construir():
             dest = l if l in notas else por_nombre.get(l.split("/")[-1].lower())
             if dest and dest != n["id"]:
                 aristas.add(tuple(sorted((n["id"], dest))))
-    return {"vault": os.path.basename(BOVEDA), "decisiones": DECISIONES, "nodes": list(notas.values()), "links": [{"source": a, "target": b} for a, b in aristas]}
+    return {"vault": os.path.basename(BOVEDA), "decisiones": DECISIONES, "inicio": V["inicio"], "nodes": list(notas.values()), "links": [{"source": a, "target": b} for a, b in aristas]}
 
 
 _ev = {"off": 0, "n": 0, "items": []}
