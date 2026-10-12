@@ -24,6 +24,8 @@ Carte 3D de votre coffre Obsidian où une araignée parcourt les notes que Claud
 
 Optionnels : `validar.py` (PostToolUse `Write|Edit` ; signale propriétés manquantes, liens cassés ou secrets collés) et `diario.py` (SessionEnd ; résume la session dans la note du jour).
 
+La première fois que vous l'ouvrez depuis une console, il demande une seule fois s'il doit démarrer avec Windows. Modifiez-le ensuite avec `python server.py --autoarranque on|off|estado`.
+
 ## Composants
 
 | Fichier | Rôle |

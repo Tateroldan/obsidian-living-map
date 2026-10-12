@@ -24,6 +24,8 @@ Mappa 3D del tuo vault di Obsidian in cui un ragno cammina sulle note che Claude
 
 Opzionali: `validar.py` (PostToolUse `Write|Edit`; avvisa di proprietà mancanti, link rotti o segreti incollati) e `diario.py` (SessionEnd; riassume la sessione nella nota giornaliera).
 
+La prima volta che lo apri da una console chiede, una sola volta, se avviarsi con Windows. Cambialo dopo con `python server.py --autoarranque on|off|estado`.
+
 ## Componenti
 
 | File | A cosa serve |

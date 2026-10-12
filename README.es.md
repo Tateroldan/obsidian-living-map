@@ -24,6 +24,8 @@ Mapa 3D de tu bóveda de Obsidian donde una araña camina por las notas que Clau
 
 Opcionales: `validar.py` (PostToolUse `Write|Edit`; avisa de propiedades faltantes, enlaces rotos o secretos pegados) y `diario.py` (SessionEnd; resume la sesión en la nota diaria).
 
+La primera vez que lo abres desde una consola pregunta, una sola vez, si quieres que arranque con Windows. Cámbialo después con `python server.py --autoarranque on|off|estado`.
+
 ## Piezas
 
 | Archivo | Para qué |

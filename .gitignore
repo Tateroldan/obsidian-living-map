@@ -4,3 +4,4 @@ events.jsonl
 _respaldo/
 *.log
 reglas.json
+preferencias.json

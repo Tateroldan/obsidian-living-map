@@ -24,6 +24,8 @@ English · [Español](README.es.md) · [Português](README.pt.md) · [Français]
 
 Optional: `validar.py` (PostToolUse `Write|Edit`; warns about missing properties, broken links or pasted secrets) and `diario.py` (SessionEnd; summarizes the session in the daily note).
 
+The first time you open it from a console it asks, once, whether to start automatically with Windows. Change it later with `python server.py --autoarranque on|off|estado`.
+
 ## Parts
 
 | File | Purpose |

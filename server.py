@@ -150,6 +150,13 @@ class H(SimpleHTTPRequestHandler):
 
 
 if __name__ == "__main__":
+    import autoarranque
+    if "--autoarranque" in sys.argv:
+        i = sys.argv.index("--autoarranque")
+        print(autoarranque.comando(sys.argv[i + 1] if i + 1 < len(sys.argv) else "estado"))
+        sys.exit(0)
+    if "--abrir" in sys.argv:
+        autoarranque.preguntar_primera_vez()
     url = "http://127.0.0.1:%d" % PUERTO
     try:
         srv = ThreadingHTTPServer(("127.0.0.1", PUERTO), H)

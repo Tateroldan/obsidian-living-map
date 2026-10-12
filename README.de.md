@@ -24,6 +24,8 @@
 
 Optional: `validar.py` (PostToolUse `Write|Edit`; warnt vor fehlenden Eigenschaften, kaputten Links oder eingefügten Geheimnissen) und `diario.py` (SessionEnd; fasst die Sitzung in der Tagesnotiz zusammen).
 
+Beim ersten Start aus einer Konsole wird einmalig gefragt, ob der Server mit Windows starten soll. Später änderbar mit `python server.py --autoarranque on|off|estado`.
+
 ## Bestandteile
 
 | Datei | Zweck |

@@ -24,6 +24,8 @@
 
 可选:`validar.py`(PostToolUse `Write|Edit`;提示缺失属性、失效链接或粘贴的密钥)和 `diario.py`(SessionEnd;把会话摘要写入当日笔记)。
 
+首次从控制台打开时,会询问一次是否随 Windows 自动启动。之后可用 `python server.py --autoarranque on|off|estado` 更改。
+
 ## 组成
 
 | 文件 | 用途 |

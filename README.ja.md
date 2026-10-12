@@ -24,6 +24,8 @@ Claude Code が読む(シアン)・書く(琥珀)・検索する(紫)ノート�
 
 任意: `validar.py`(PostToolUse `Write|Edit`。プロパティ欠落、壊れたリンク、貼り付けられた秘密情報を警告)と `diario.py`(SessionEnd。セッションをデイリーノートに要約)。
 
+コンソールから初めて開くと、Windows 起動時に自動で開始するかどうかを一度だけ尋ねます。後から `python server.py --autoarranque on|off|estado` で変更できます。
+
 ## 構成
 
 | ファイル | 役割 |
