@@ -36,3 +36,17 @@ python kit/instalar.py --lang en       # kit en inglés (carpetas, propiedades y
 ## Lo que NO trae
 
 Skills de dominio (video, juegos, marketing…): cada quien crea las suyas con `find-skills` o a mano, y las apunta en `IA/Skills.md`. Las neuronas de ejemplo son solo guía: reemplázalas por las tuyas.
+
+## Qué promete y qué no (medido)
+
+- **No abarata una tarea aislada.** En pruebas A/B controladas el kit cuesta parecido o algo más por tarea, porque leer contexto y escribir el cierre añade turnos.
+- **Sí evita retrabajo cuando hay una neurona aplicable.** En un escenario donde una convención del cliente solo vivía en una neurona, con el kit salió bien a la primera en 3 de 4 corridas; sin kit, 0 de 2 (cada fallo implicó re-explicar y pagar de nuevo). El costo total, con retrabajo incluido, quedó dentro del ruido.
+- **Los hooks opcionales** (`kit/hooks/`: inyección de contexto y compuerta de cierre) no mostraron ganancia sobre el `CLAUDE.md` solo y no se recomiendan por defecto.
+- **Límites:** muestras mínimas (n = 2 por brazo), un solo modelo, escenarios diseñados. Es evidencia del mecanismo, no prueba de ahorro.
+
+El detalle y las cifras están en las notas del proyecto; falta documentación (ver abajo).
+
+## Documentación pendiente
+- Guía paso a paso con un ejemplo completo (tarea → neurona → reutilización).
+- Cómo escribir neuronas que de verdad se reutilicen (qué incluir y qué no).
+- Cómo correr tu propia medición A/B y leer la varianza.

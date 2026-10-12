@@ -38,3 +38,17 @@ python kit/instalar.py --lang en               # step by step, asks before each 
 ## What it does NOT include
 
 Domain skills (video, games, marketing…): everyone creates their own with `find-skills` or by hand and lists them in `AI/Skills.md`. The example learnings are only a guide: replace them with yours.
+
+## What it does and does not claim (measured)
+
+- **It does not make a single task cheaper.** In controlled A/B runs the kit costs about the same or a bit more per task, because reading context and writing the closing notes adds turns.
+- **It does avoid rework when a stored learning applies.** In a scenario where a client convention lived only in a learning, the kit got it right on the first try in 3 of 4 runs; without the kit, 0 of 2 (each failure meant re-explaining and paying again). Total cost, rework included, was within the noise.
+- **Optional hooks** (`kit/hooks/`: context injection and a closing gate) showed no gain over the plain `CLAUDE.md` and are not recommended by default.
+- **Limits:** tiny samples (n = 2 per arm), one model, designed scenarios. Treat it as evidence of the mechanism, not proof of savings.
+
+Details and the raw numbers are in the project notes; more documentation is pending (see below).
+
+## Pending documentation
+- Step-by-step guide with a worked example (task → learning → reuse).
+- How to write learnings that actually get reused (what to include, what to skip).
+- How to run your own A/B measurement and read the variance.
