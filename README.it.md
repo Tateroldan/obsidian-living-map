@@ -44,6 +44,10 @@ Parametri URL: `?tema=rgb&lang=it`. Un clic su una nota la apre in Obsidian; dop
 
 Tutto gira su `127.0.0.1`. `events.jsonl` contiene i percorsi delle tue note; è nel `.gitignore`.
 
+## Supporto
+
+Se ti è utile, puoi [offrirmi un caffè su Ko-fi](https://ko-fi.com/tateroldan) ☕
+
 ## Licenze di terzi
 
 - d3 7.9.0 (ISC), `vendor/`

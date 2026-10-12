@@ -44,6 +44,10 @@ Parâmetros de URL: `?tema=rgb&lang=pt`. Clique numa nota para abri-la no Obsidi
 
 Tudo roda em `127.0.0.1`. `events.jsonl` guarda os caminhos das suas notas; está no `.gitignore`.
 
+## Apoio
+
+Se for útil para você, pode [me pagar um café no Ko-fi](https://ko-fi.com/tateroldan) ☕
+
 ## Licenças de terceiros
 
 - d3 7.9.0 (ISC), `vendor/`

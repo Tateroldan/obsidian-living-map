@@ -44,6 +44,10 @@ URL parameters: `?tema=rgb&lang=en`. Click a note to open it in Obsidian; double
 
 Everything runs on `127.0.0.1`. `events.jsonl` stores your note paths; it is in `.gitignore`.
 
+## Support
+
+If it is useful to you, you can [buy me a coffee on Ko-fi](https://ko-fi.com/tateroldan) ☕
+
 ## Third-party licenses
 
 - d3 7.9.0 (ISC), `vendor/`

@@ -44,6 +44,10 @@ URL-Parameter: `?tema=rgb&lang=de`. Klick auf eine Notiz öffnet sie in Obsidian
 
 Alles läuft auf `127.0.0.1`. `events.jsonl` speichert die Pfade deiner Notizen; sie steht in `.gitignore`.
 
+## Unterstützung
+
+Wenn es dir nützt, kannst du mir [auf Ko-fi einen Kaffee spendieren](https://ko-fi.com/tateroldan) ☕
+
 ## Lizenzen Dritter
 
 - d3 7.9.0 (ISC), `vendor/`

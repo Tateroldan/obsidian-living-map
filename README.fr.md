@@ -44,6 +44,10 @@ Paramètres d'URL : `?tema=rgb&lang=fr`. Un clic sur une note l'ouvre dans Obsid
 
 Tout tourne sur `127.0.0.1`. `events.jsonl` contient les chemins de vos notes ; il est dans `.gitignore`.
 
+## Soutien
+
+Si cela vous est utile, vous pouvez [m'offrir un café sur Ko-fi](https://ko-fi.com/tateroldan) ☕
+
 ## Licences tierces
 
 - d3 7.9.0 (ISC), `vendor/`

@@ -44,6 +44,10 @@ URL 参数:`?tema=rgb&lang=zh`。单击笔记在 Obsidian 中打开,双击则聚
 
 一切都在 `127.0.0.1` 上运行。`events.jsonl` 保存你的笔记路径,已加入 `.gitignore`。
 
+## 支持
+
+如果它对你有帮助,可以在 [Ko-fi 请我喝杯咖啡](https://ko-fi.com/tateroldan) ☕
+
 ## 第三方许可
 
 - d3 7.9.0 (ISC), `vendor/`

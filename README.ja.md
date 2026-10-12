@@ -44,6 +44,10 @@ URL パラメータ: `?tema=rgb&lang=ja`。ノートをクリックすると Obs
 
 すべて `127.0.0.1` 上で動作します。`events.jsonl` にはノートのパスが保存されますが、`.gitignore` に入っています。
 
+## サポート
+
+役に立ったら、[Ko-fi でコーヒーをおごる](https://ko-fi.com/tateroldan)こともできます ☕
+
 ## サードパーティのライセンス
 
 - d3 7.9.0 (ISC), `vendor/`
