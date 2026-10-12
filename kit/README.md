@@ -42,7 +42,8 @@ Domain skills (video, games, marketing…): everyone creates their own with `fin
 ## What it does and does not claim (measured)
 
 - **It does not make a single task cheaper.** In controlled A/B runs the kit costs about the same or a bit more per task, because reading context and writing the closing notes adds turns.
-- **It does avoid rework when a stored learning applies.** In a scenario where a client convention lived only in a learning, the kit got it right on the first try in 3 of 4 runs; without the kit, 0 of 2 (each failure meant re-explaining and paying again). Total cost, rework included, was within the noise.
+- **It does avoid format mistakes when a stored learning applies.** Scenario: a client's CSV convention lived only in a learning. Across 15 runs (5 per arm), the file came out in the wrong format 4 of 5 times without the kit and 0 of 10 times with it (Fisher exact p ≈ 0.004). The code was eventually correct in all 15 runs, because without the kit the user re-explained the convention and paid for a second round.
+- **Total cost came out equal** (≈ $0.147 per task in all three arms). The kit's first-try savings were offset by 3 of 10 kit runs that did not execute the script and needed a second round.
 - **Optional hooks** (`kit/hooks/`: context injection and a closing gate) showed no gain over the plain `CLAUDE.md` and are not recommended by default.
 - **Limits:** tiny samples (n = 2 per arm), one model, designed scenarios. Treat it as evidence of the mechanism, not proof of savings.
 

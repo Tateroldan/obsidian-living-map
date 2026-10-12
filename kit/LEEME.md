@@ -40,7 +40,8 @@ Skills de dominio (video, juegos, marketing…): cada quien crea las suyas con `
 ## Qué promete y qué no (medido)
 
 - **No abarata una tarea aislada.** En pruebas A/B controladas el kit cuesta parecido o algo más por tarea, porque leer contexto y escribir el cierre añade turnos.
-- **Sí evita retrabajo cuando hay una neurona aplicable.** En un escenario donde una convención del cliente solo vivía en una neurona, con el kit salió bien a la primera en 3 de 4 corridas; sin kit, 0 de 2 (cada fallo implicó re-explicar y pagar de nuevo). El costo total, con retrabajo incluido, quedó dentro del ruido.
+- **Sí evita errores de formato cuando hay una neurona aplicable.** Escenario: la convención de CSV de un cliente solo vivía en una neurona. En 15 corridas (5 por brazo), el archivo salió en formato equivocado 4 de 5 veces sin kit y 0 de 10 con kit (Fisher exacto p ≈ 0.004). El código quedó correcto en las 15 corridas, porque sin kit el usuario re-explicó la convención y pagó una segunda ronda.
+- **El costo total salió igual** (≈ $0.147 por tarea en los tres brazos). El ahorro de acertar a la primera se compensó con 3 de 10 corridas con kit que no ejecutaron el script y necesitaron una segunda ronda.
 - **Los hooks opcionales** (`kit/hooks/`: inyección de contexto y compuerta de cierre) no mostraron ganancia sobre el `CLAUDE.md` solo y no se recomiendan por defecto.
 - **Límites:** muestras mínimas (n = 2 por brazo), un solo modelo, escenarios diseñados. Es evidencia del mecanismo, no prueba de ahorro.
 
