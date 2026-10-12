@@ -16,7 +16,9 @@ from config import BOVEDA, OMITIR  # noqa: E402
 from reglas import V  # noqa: E402
 
 STOP = {"the", "and", "for", "with", "that", "this", "from", "una", "los", "las", "del", "con", "para", "por", "que", "como",
-        "mis", "mi", "my", "in", "to", "of", "a", "an", "is", "it", "on", "en", "de", "la", "el", "un", "se", "me", "add", "fix"}
+        "mis", "mi", "my", "in", "to", "of", "a", "an", "is", "it", "on", "en", "de", "la", "el", "un", "se", "me", "add", "fix",
+        "how", "are", "you", "today", "hello", "please", "what", "when", "can", "will", "would", "should", "need", "want",
+        "make", "use", "using", "new", "hola", "favor", "puedes", "quiero", "necesito", "hacer", "hoy", "work", "code"}
 FM = re.compile(r"\A---\r?\n.*?\r?\n---\r?\n?", re.S)
 
 
@@ -93,11 +95,11 @@ def main():
         es_neurona = rel.startswith(V["aprendizajes"] + "/")
         if es_neurona:
             s = puntaje(p.stem, txt, kw)
-            if s:
+            if s >= 4 or any(w in p.stem.lower() for w in kw):   # evita coincidencias sueltas de palabras comunes
                 neuronas.append((s, p.stem, resumen(txt)))
         elif seccion(txt, titulo_estado, 1):
             s = puntaje(p.stem, txt[:800], kw)
-            if s:
+            if s >= 4 or any(w in p.stem.lower() for w in kw):
                 proyectos.append((s, p, txt))
     print(f"# Contexto para: {' '.join(a.tema)}  (bóveda: {boveda})")
     if proyectos:

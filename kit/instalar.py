@@ -187,6 +187,9 @@ def main():
     print(f'   hook.py    -> PostToolUse  python "{RAIZ / "hook.py"}"')
     print(f'   validar.py -> PostToolUse (Write|Edit)  python "{RAIZ / "validar.py"}"')
     print(f'   diario.py  -> SessionEnd   python "{RAIZ / "diario.py"}"')
+    print("   (opcionales, sin ahorro demostrado todavía / optional, no proven saving yet)")
+    print(f'   kit/hooks/inyectar_contexto.py -> UserPromptSubmit  python "{KIT / "hooks" / "inyectar_contexto.py"}"')
+    print(f'   kit/hooks/cierre.py            -> Stop             python "{KIT / "hooks" / "cierre.py"}"')
     print("\n" + t["fin"])
 
 
