@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAPA VIVO</title>
+<script src="vendor/d3.min.js"></script><!-- d3 7.9.0 local: funciona sin internet -->
+<style>
+  @font-face{font-family:'Departure Mono';src:url('fuentes/DepartureMono-Regular.woff2') format('woff2');font-display:swap}
+  b,strong,h1,h2,h3{font-weight:400}
+  :root{--fuente:'Departure Mono',ui-monospace,monospace;--fondo:#0e0f11;--panel:#141518;--linea:#26282d;--texto:#d8d9dc;--tenue:#7c7f86;--acento:#9B6DFF;--nodo:#b4b7bd;--arista:#8a8d94;
+    --v-read:#56B4E9;--v-write:#9B6DFF;--v-search:#CC79A7;--alerta:#D55E00;--vineta:0;--grano:0;--fondo-rgb:14,15,17;--barra:40px;--feedw:264px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:var(--fondo);color:var(--texto);font:400 11px/16px var(--fuente);-webkit-font-smoothing:none;font-variant-numeric:tabular-nums;overflow:hidden}
+  canvas#c{position:fixed;inset:0;cursor:grab;touch-action:none}
+  canvas#c:active{cursor:grabbing}
+  .lbl{font-size:11px;line-height:16px;letter-spacing:.12em;text-transform:uppercase;color:var(--tenue)}
+  /* barra superior */
+  #bar{position:fixed;top:0;left:0;right:0;height:var(--barra);z-index:5;display:flex;align-items:center;gap:24px;padding:0 16px;background:var(--panel);border-bottom:1px solid var(--linea)}
+  #bar .brand{;letter-spacing:.16em;font-size:11px;color:var(--texto)}
+  #estado{display:flex;align-items:center;gap:8px}
+  #punto{width:8px;height:8px;background:var(--tenue);border-radius:0}
+  #punto.on{background:var(--acento);animation:lat 1.4s steps(2,end) infinite}
+  @keyframes lat{50%{opacity:.25}}
+  #bar .sp{flex:1}
+  .sel{display:flex;align-items:center;gap:8px}
+  select{font:inherit;font-size:11px;color:var(--texto);background:var(--fondo);border:1px solid var(--linea);border-radius:2px;height:24px;padding:0 8px;outline:none}
+  select:focus-visible,button:focus-visible{outline:1px solid var(--acento)}
+  button.tg{font:inherit;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--tenue);background:none;border:1px solid var(--linea);border-radius:2px;height:24px;padding:0 8px;cursor:pointer}
+  button.tg[aria-pressed=true]{color:var(--texto);border-color:var(--tenue)}
+  /* feed */
+  #feed{position:fixed;top:var(--barra);right:0;width:var(--feedw);bottom:136px;z-index:4;background:var(--panel);border-left:1px solid var(--linea);display:flex;flex-direction:column}
+  #feed header,#datos header{padding:8px 16px;border-bottom:1px solid var(--linea)}
+  #log{padding:8px 16px;overflow:hidden;flex:1}
+  #log div{display:grid;grid-template-columns:56px 52px 1fr;gap:0 8px;height:24px;line-height:24px;font-size:11px;white-space:nowrap;border-bottom:1px solid var(--linea)}
+  #log i{font-style:normal;color:var(--tenue)}
+  #log span.n{overflow:hidden;text-overflow:ellipsis;color:var(--texto)}
+  #log .vacio{display:block;color:var(--tenue);border:0}
+  .v-read{color:var(--v-read)}.v-write{color:var(--v-write)}.v-search{color:var(--v-search)}
+  #log b.ag{;margin-right:6px}
+  #arList{margin-top:4px;font-size:11px;line-height:16px;white-space:normal}
+  button.tg b{;color:var(--acento);margin-left:4px}
+  /* paneles izquierdos: decisiones y salud */
+  #izq{position:fixed;left:16px;top:calc(var(--barra) + 12px);width:300px;max-height:calc(100% - var(--barra) - 170px);overflow:auto;z-index:4;display:flex;flex-direction:column;gap:8px}
+  #izq section{background:var(--panel);border:1px solid var(--linea)}
+  #izq section[hidden]{display:none}
+  #izq header{padding:8px 12px;border-bottom:1px solid var(--linea)}
+  #izq .it{padding:6px 12px;border-bottom:1px solid var(--linea);font-size:11px;line-height:16px;cursor:pointer;overflow-wrap:anywhere}
+  #izq .it:hover{background:rgba(127,127,127,.12);box-shadow:inset 2px 0 0 var(--acento)}
+  #izq .it.pl{cursor:default}#izq .it.pl:hover{background:none;box-shadow:none}
+  #izq .vac{padding:8px 12px;color:var(--tenue);font-size:11px}
+  #izq .al{color:var(--alerta)}
+  /* datos inferiores */
+  #datos{position:fixed;left:0;right:0;bottom:0;height:136px;z-index:4;background:var(--panel);border-top:1px solid var(--linea);display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) 1.6fr;gap:0}
+  #datos .c{padding:8px 16px;border-right:1px solid var(--linea);overflow:hidden;min-width:0}
+  #datos .c:last-child{border-right:0}
+  .num{font-size:22px;line-height:32px;color:var(--texto)}
+  .kv{display:flex;justify-content:space-between;font-size:11px;line-height:20px}
+  .kv b{}
+  .kv.r b{color:var(--v-read)}.kv.w b{color:var(--v-write)}.kv.s b{color:var(--v-search)}
+  #cur{font-size:11px;line-height:16px;margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #areasR div{font-size:11px;line-height:20px;display:flex;gap:8px;align-items:center;white-space:nowrap;overflow:hidden}
+  #areasR i{display:inline-block;width:8px;height:8px;flex:none}
+  #spark{width:100%;height:80px;display:block;margin-top:8px}
+  body.sin-datos #datos{display:none}body.sin-datos #feed{bottom:0}
+  body.sin-feed #feed{display:none}
+  #ctrl{position:fixed;left:16px;bottom:152px;z-index:3;font-size:11px;line-height:16px;color:var(--tenue);pointer-events:none}
+  body.sin-datos #ctrl{bottom:16px}
+  #wait{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;color:var(--tenue);font-size:11px;z-index:9;background:var(--fondo)}
+  /* cine: viñeta y grano */
+  #fx{position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,calc(var(--vineta)*.7)) 100%)}
+  #fx::after{content:"";position:absolute;inset:0;opacity:var(--grano);mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
+  @media (max-width:1000px){#datos{grid-template-columns:repeat(2,minmax(0,1fr))}#datos .c:nth-child(n+3){display:none}#datos{height:120px}#feed{bottom:120px;--feedw:224px}#ctrl{bottom:136px}}
+  @media (max-width:640px){#bar{gap:12px;padding:0 8px;overflow-x:auto}#bar>*{flex:none}#bar #estado .lbl.txt{display:none}#feed{top:auto;left:0;width:auto;height:168px;bottom:120px;border-left:0;border-top:1px solid var(--linea)}#ctrl{display:none}body.sin-datos #feed{bottom:0}.sel .lbl{display:none}}
+  /* tema RGB: tira de luz bajo la barra */
+  html[data-tema="rgb"] #bar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,#ff1744,#ffea00,#00e676,#00e5ff,#2979ff,#d500f9,#ff1744);background-size:200% 100%;animation:tira 8s linear infinite}
+  @keyframes tira{to{background-position:-200% 0}}
+  @media (prefers-reduced-motion:reduce){#punto.on,html[data-tema="rgb"] #bar::after{animation:none}}
+</style>
+</head>
+<body class="sin-feed">
+<canvas id="c"></canvas>
+<div id="fx"></div>
+<div id="bar">
+  <span class="brand" data-i18n="brand">MAPA VIVO</span>
+  <span id="estado"><span id="punto"></span><span class="lbl txt" id="estTxt" data-i18n="idle">INACTIVO</span></span>
+  <span class="sp"></span>
+  <label class="sel"><span class="lbl" data-i18n="tema">TEMA</span><select id="selTema" aria-label="tema"></select></label>
+  <label class="sel"><span class="lbl" data-i18n="idioma">IDIOMA</span><select id="selIdioma" aria-label="idioma"></select></label>
+  <button class="tg" id="tgDec" aria-pressed="false"><span data-i18n="decisiones">DECISIONES</span><b id="nDec">0</b></button>
+  <button class="tg" id="tgSalud" aria-pressed="false" data-i18n="salud">SALUD</button>
+  <button class="tg" id="tgFeed" aria-pressed="false" data-i18n="feed">FEED EN VIVO</button>
+  <button class="tg" id="tgDatos" aria-pressed="true" data-i18n="panel">PANEL</button>
+</div>
+<div id="izq">
+  <section id="pDec" hidden><header class="lbl" data-i18n="decisiones">DECISIONES</header><div id="decList"></div></section>
+  <section id="pSal" hidden><div id="salList"></div></section>
+</div>
+<aside id="feed"><header class="lbl" data-i18n="feed">FEED EN VIVO</header><div id="log"></div></aside>
+<section id="datos">
+  <div class="c"><div class="lbl" data-i18n="notas">NOTAS</div><div class="num" id="sN">0</div><div class="kv"><span class="lbl" data-i18n="enlaces">ENLACES</span><b id="sL">0</b></div><div class="kv"><span class="lbl" data-i18n="epm">EVENTOS/MIN</span><b id="rate">0</b></div></div>
+  <div class="c"><div class="lbl" data-i18n="sesion">SESIÓN</div>
+    <div class="kv r"><span data-i18n="leer">leer</span><b id="sR">0</b></div><div class="kv w"><span data-i18n="escribir">escribir</span><b id="sW">0</b></div><div class="kv s"><span data-i18n="buscar">buscar</span><b id="sS">0</b></div></div>
+  <div class="c"><div class="lbl" data-i18n="actual">NOTA ACTUAL</div><div id="cur">-</div><div class="lbl" id="curArea" style="margin-top:8px"></div><div class="lbl" style="margin-top:8px" data-i18n="agentes">ARAÑAS</div><div id="arList"></div></div>
+  <div class="c"><div class="lbl" data-i18n="areas">ÁREAS RECIENTES</div><div id="areasR"></div></div>
+  <div class="c"><div class="lbl" data-i18n="spark">ACTIVIDAD 10 MIN</div><canvas id="spark"></canvas></div>
+</section>
+<div id="ctrl"><div id="c1"></div><div id="c2"></div><div id="follow"></div></div>
+<div id="wait" data-i18n="cargando">cargando bóveda…</div>
+
+<script src="tema.js"></script>
+<script src="idioma.js"></script>
+<script src="crawler.js"></script>
+<script src="mapa3d.js"></script>
+<script src="paneles.js"></script>
+</body>
+</html>

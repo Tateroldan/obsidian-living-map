@@ -1,0 +1,9 @@
+{
+  "tipos": ["aprendizaje", "proyecto", "plan", "guia", "indice", "diario"],
+  "areas": ["trabajo", "personal", "proyectos", "ideas", "sistema"],
+  "estados": ["activo", "idea", "listo", "archivado"],
+  "max_lineas": 400,
+  "omitir": [".obsidian", "Adjuntos", ".trash", "Plantillas"],
+  "exentas": [],
+  "no_mezclar": []
+}

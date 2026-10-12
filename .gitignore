@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+events.jsonl
+_respaldo/
+*.log
+reglas.json
