@@ -44,6 +44,10 @@ URL-Parameter: `?tema=rgb&lang=de`. Klick auf eine Notiz öffnet sie in Obsidian
 
 Alles läuft auf `127.0.0.1`. `events.jsonl` speichert die Pfade deiner Notizen; sie steht in `.gitignore`.
 
+## Kit (der selbstlernende Teil)
+
+Die Karte zeigt, was Claude berührt; `kit/` gibt Claude die Arbeitsweise, mit der der Vault von selbst wächst: Regeln für Beginn und Abschluss von Aufgaben, verknüpfte Notizen („Neuronen“), ein Bibliothekar-Agent, ein Posteingangs-Router ohne Tokens, eine Abschluss-Skill und ein Beispiel-Vault. Keine persönlichen Notizen sind enthalten. Vorschau mit `python kit/instalar.py --simulacro`. Details: [kit/LEEME.md](kit/LEEME.md).
+
 ## Unterstützung
 
 Wenn es dir nützt, kannst du mir [auf Ko-fi einen Kaffee spendieren](https://ko-fi.com/tateroldan) ☕

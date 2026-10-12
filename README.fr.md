@@ -44,6 +44,10 @@ Paramètres d'URL : `?tema=rgb&lang=fr`. Un clic sur une note l'ouvre dans Obsid
 
 Tout tourne sur `127.0.0.1`. `events.jsonl` contient les chemins de vos notes ; il est dans `.gitignore`.
 
+## Kit (la partie autodidacte)
+
+La carte montre ce que Claude touche ; `kit/` lui donne la méthode de travail qui fait grandir le coffre tout seul : règles pour commencer et finir les tâches, notes liées (« neurones »), un agent bibliothécaire, un routeur de boîte de réception sans tokens, une skill de clôture et un coffre d'exemple. Aucune note personnelle n'est incluse. Aperçu avec `python kit/instalar.py --simulacro`. Détails : [kit/LEEME.md](kit/LEEME.md).
+
 ## Soutien
 
 Si cela vous est utile, vous pouvez [m'offrir un café sur Ko-fi](https://ko-fi.com/tateroldan) ☕

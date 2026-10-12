@@ -60,7 +60,7 @@ def revisar(ruta):
     rel = os.path.relpath(ruta, BOVEDA).replace("\\", "/")
     if rel.startswith("..") or rel in EXENTAS or not rel.endswith(".md"):
         return []
-    if set(rel.split("/")[:-1]) & OMITIR or rel.startswith("00 Diario/"):
+    if set(rel.split("/")[:-1]) & OMITIR or rel.startswith(("00 Diario/", "00 Bandeja/")):
         return []
     txt = open(ruta, encoding="utf-8", errors="replace").read()
     props, cuerpo = propiedades(txt)

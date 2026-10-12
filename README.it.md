@@ -44,6 +44,10 @@ Parametri URL: `?tema=rgb&lang=it`. Un clic su una nota la apre in Obsidian; dop
 
 Tutto gira su `127.0.0.1`. `events.jsonl` contiene i percorsi delle tue note; è nel `.gitignore`.
 
+## Kit (la parte autodidatta)
+
+La mappa mostra cosa tocca Claude; `kit/` gli dà il metodo di lavoro che fa crescere il vault da solo: regole per iniziare e chiudere i compiti, note collegate («neuroni»), un agente bibliotecario, un router della casella senza token, una skill di chiusura e un vault di esempio. Nessuna nota personale inclusa. Anteprima con `python kit/instalar.py --simulacro`. Dettagli: [kit/LEEME.md](kit/LEEME.md).
+
 ## Supporto
 
 Se ti è utile, puoi [offrirmi un caffè su Ko-fi](https://ko-fi.com/tateroldan) ☕

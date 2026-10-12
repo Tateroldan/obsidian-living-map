@@ -1,9 +1,20 @@
 {
-  "tipos": ["aprendizaje", "proyecto", "plan", "guia", "indice", "diario"],
-  "areas": ["trabajo", "personal", "proyectos", "ideas", "sistema"],
-  "estados": ["activo", "idea", "listo", "archivado"],
+  "tipos": ["aprendizaje", "prompt", "proyecto", "plan", "guia", "script", "indice", "diario"],
+  "areas": ["trabajo", "personal", "proyectos", "ideas", "ia", "sistema"],
+  "estados": ["activo", "idea", "listo", "reemplazada", "archivado"],
   "max_lineas": 400,
   "omitir": [".obsidian", "Adjuntos", ".trash", "Plantillas"],
   "exentas": [],
-  "no_mezclar": []
+  "no_mezclar": [],
+  "router": {
+    "umbral": 0.85,
+    "no_mezclar": [],
+    "areas": {
+      "trabajo": {"carpeta": "Trabajo", "palabras": ["cliente", "reunión", "reunion", "factura", "cotización", "cotizacion", "presupuesto", "precio", "cobro"]},
+      "personal": {"carpeta": "Personal", "palabras": ["familia", "salud", "viaje", "compras", "cumpleaños", "cita"]},
+      "proyectos": {"carpeta": "Proyectos", "palabras": ["proyecto", "roadmap", "entrega", "sprint", "boletín", "boletin"]},
+      "ideas": {"carpeta": "Ideas", "palabras": ["idea", "se me ocurrió", "se me ocurrio", "quizá", "quiza"]},
+      "ia": {"carpeta": "IA", "palabras": ["claude", "prompt", "agente", "modelo", "tokens", "skill", "obsidian", "mcp"]}
+    }
+  }
 }
