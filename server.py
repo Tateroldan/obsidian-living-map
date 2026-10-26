@@ -1,5 +1,5 @@
 """Servidor local del mapa vivo: http://127.0.0.1:8765"""
-import json, os, re, sys, threading, webbrowser
+import json, os, re, socketserver, sys, threading, webbrowser
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 import salud
@@ -110,6 +110,14 @@ def decisiones():
     return [m.group(1).strip() for m in re.finditer(r"^[ \t]*[-*] \[ \][ \t]+(.+?)[ \t]*$", txt, re.M)]
 
 
+class Servidor(ThreadingHTTPServer):
+    """HTTPServer.server_bind llama a socket.getfqdn(): en macOS esa búsqueda DNS tarda ~30 s antes de escuchar.
+    Solo servimos en 127.0.0.1, así que no hace falta el nombre."""
+    def server_bind(self):
+        socketserver.TCPServer.server_bind(self)
+        self.server_name, self.server_port = self.server_address[:2]
+
+
 class H(SimpleHTTPRequestHandler):
     def __init__(self, *a, **k):
         super().__init__(*a, directory=AQUI, **k)
@@ -160,13 +168,13 @@ if __name__ == "__main__":
         autoarranque.preguntar_primera_vez()
     url = "http://127.0.0.1:%d" % PUERTO
     try:
-        srv = ThreadingHTTPServer(("127.0.0.1", PUERTO), H)
+        srv = Servidor(("127.0.0.1", PUERTO), H)
     except OSError:  # puerto ocupado: casi siempre es el mapa que ya estaba abierto
         print(M["srv_ocupado"].format(p=PUERTO))
         if "--abrir" in sys.argv:
             webbrowser.open(url)
         sys.exit(0)
-    print(M["srv_listo"].format(u=url))
+    print(M["srv_listo"].format(u=url), flush=True)
     if "--abrir" in sys.argv:  # el navegador se abre cuando el servidor ya escucha
         webbrowser.open(url)
     try:
