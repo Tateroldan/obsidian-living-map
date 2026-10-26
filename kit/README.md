@@ -21,11 +21,13 @@ Spanish version: [LEEME.md](LEEME.md).
 ```
 python kit/instalar.py --lang en --simulacro   # see what it would do, writes nothing
 python kit/instalar.py --lang en               # step by step, asks before each group
+python kit/instalar.py --lang en --si --claude-md --hooks   # everything, no prompts (after reviewing --simulacro)
 ```
 
 - The example vault is created at `MAPA_BOVEDA` (or `~/Documents/Boveda`). If the folder already has notes, only the missing files are added.
 - The `CLAUDE.md` block is shown and you are **always** asked; a `.bak` copy is saved first.
-- Hooks are not edited automatically: the installer prints the lines for `settings.json`.
+- Hooks are added to `settings.json` only with `--hooks` (`.bak` copy, no duplicates, same Python as the installer); otherwise the installer prints the lines.
+- The vault folder (`--boveda`) is saved in `preferencias.json`, so the hook, the server and `contexto.py` find it without environment variables.
 - `--lang en` also copies `reglas.ejemplo.en.json` to `reglas.json` (English property names, folders and messages: `type/area/status/created`, `00 Inbox`, `Learnings`...).
 
 ## How it grows on its own

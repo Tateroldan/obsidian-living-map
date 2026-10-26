@@ -54,13 +54,12 @@ Este repo le da **memoria y orden**:
 
 ```
 Soy principiante. Instálame este repo paso a paso, explicándome en palabras simples:
-1. Corre `python kit/instalar.py --lang es --simulacro` y explícame qué va a crear.
-2. Si estoy de acuerdo, córrelo con `--si` para aplicarlo.
-3. Agrega a mi settings.json de Claude Code los hooks que imprime el instalador
-   (hook.py, validar.py y diario.py; NO los opcionales). Antes, haz una copia de seguridad.
-   Usa el comando de Python que funcione en esta computadora (python o python3).
-4. Abre el mapa con `python server.py --abrir`.
-5. Dime en qué carpeta quedó mi bóveda para abrirla en Obsidian.
+1. Corre `python kit/instalar.py --lang es --simulacro` (o python3 si python no existe)
+   y explícame qué va a crear y qué bloque agregará a mi CLAUDE.md.
+2. Si estoy de acuerdo, córrelo con `--lang es --si --claude-md --hooks` para aplicarlo
+   (guarda copias .bak de lo que toca y no sobrescribe nada).
+3. Abre el mapa con `python server.py --abrir` y déjalo corriendo en segundo plano.
+4. Dime la ruta completa de mi bóveda para abrirla en Obsidian.
 Pregúntame antes de cada paso.
 ```
 
@@ -85,7 +84,8 @@ Pregúntame antes de cada paso.
 |---|---|
 | `python` no se reconoce | Reinstala Python y marca «Add python.exe to PATH». En Mac usa `python3` |
 | `claude` no se reconoce | Cierra y vuelve a abrir la terminal; si sigue, repite el paso 3 |
-| El mapa abre pero no se ve la araña | Reinicia Claude Code (los hooks se cargan al iniciar) y pídele que lea una nota |
+| El mapa abre pero no se ve la araña | Cierra y vuelve a abrir Claude Code (los hooks se cargan al iniciar) y pídele que lea una nota |
+| Mi bóveda está en otra carpeta | Corre el instalador con `--boveda "ruta"`: la recuerda para siempre |
 | No sé qué hice | Abre `claude` en la carpeta del repo y dile: «revisa si la instalación quedó bien» |
 
 Más detalle técnico: [README.es.md](README.es.md) y [kit/LEEME.md](kit/LEEME.md).

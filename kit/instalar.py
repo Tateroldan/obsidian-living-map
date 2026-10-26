@@ -9,16 +9,23 @@ Nunca sobrescribe nada que ya exista / Never overwrites anything that already ex
   python kit/instalar.py --lang en       English kit (default: es)
   python kit/instalar.py --simulacro     muestra el plan sin escribir / shows the plan, writes nothing
   python kit/instalar.py --si            responde «sí» a todo menos al CLAUDE.md / yes to all but CLAUDE.md
-  python kit/instalar.py --boveda RUTA   carpeta de la bóveda / vault folder (default MAPA_BOVEDA or ~/Documents/Boveda)
+  python kit/instalar.py --claude-md     agrega el bloque al CLAUDE.md sin preguntar (ya lo viste en --simulacro)
+                                         / adds the CLAUDE.md block without asking (you saw it in --simulacro)
+  python kit/instalar.py --hooks         agrega los hooks recomendados a settings.json (copia .bak)
+                                         / adds the recommended hooks to settings.json (.bak copy)
+  python kit/instalar.py --boveda RUTA   carpeta de la bóveda / vault folder (default MAPA_BOVEDA or ~/Documents/Boveda);
+                                         queda guardada en preferencias.json / saved in preferencias.json
 """
-import argparse, os, shutil, sys
+import argparse, json, os, shutil, sys
 from datetime import date
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 KIT = Path(__file__).resolve().parent
 sys.path.insert(0, str(RAIZ))
-from config import BOVEDA  # noqa: E402
+sys.path.insert(0, str(KIT))
+from config import BOVEDA, PREFS  # noqa: E402
+import ajustes_hooks  # noqa: E402  (kit/ajustes_hooks.py)
 
 INI = "<!-- olm:inicio"
 FUENTES = {  # idioma -> (bóveda de ejemplo, carpeta claude, reglas de ejemplo, plantilla CLAUDE.md)
@@ -36,7 +43,7 @@ T = {
         agregaria="  Se agregaría este bloque al FINAL de {d} (con copia .bak antes):",
         q4="¿Agregar el bloque a tu CLAUDE.md global?", agregado="  agregado (copia en CLAUDE.md.bak)",
         no_mod="  no se modificó. Si lo quieres, pega kit/{p} a mano.",
-        s5="5. Hooks (no se editan solos): agrégalos a {d} con /hooks o a mano:",
+        s5="5. Hooks en {d} (con --hooks se agregan solos; si no, agrégalos con /hooks o a mano):",
         fin="Listo. Abre el mapa con abrir.cmd y mira la araña recorrer tu bóveda.",
         sin_tty="(sin consola interactiva: solo se muestra el plan; usa --si para aplicar)",
         copiaria="copiaría", copiado="copiado", ya="ya existían {n} (no se tocan)", si="sí", no="no", sn="s/n"),
@@ -50,7 +57,7 @@ T = {
         agregaria="  This block would be added at the END of {d} (a .bak copy is made first):",
         q4="Add the block to your global CLAUDE.md?", agregado="  added (copy in CLAUDE.md.bak)",
         no_mod="  not modified. If you want it, paste kit/{p} by hand.",
-        s5="5. Hooks (not edited automatically): add them to {d} with /hooks or by hand:",
+        s5="5. Hooks in {d} (--hooks adds them for you; otherwise add them with /hooks or by hand):",
         fin="Done. Open the map with abrir.cmd and watch the spider walk your vault.",
         sin_tty="(no interactive console: only the plan is shown; use --si to apply)",
         copiaria="would copy", copiado="copied", ya="{n} already existed (left alone)", si="yes", no="no", sn="y/n"),
@@ -71,7 +78,7 @@ def preguntar(texto, auto, t):
 
 def sustituir(texto, boveda):
     return (texto.replace("{{BOVEDA}}", str(boveda).replace("\\", "/")).replace("{{HOY}}", date.today().isoformat())
-            .replace("{{REPO}}", str(RAIZ).replace("\\", "/")))
+            .replace("{{REPO}}", str(RAIZ).replace("\\", "/")).replace("{{PY}}", Path(sys.executable).as_posix()))
 
 
 def copiar_arbol(origen, destino, boveda, simulacro, sustituir_marcas=True):
@@ -125,6 +132,8 @@ def main():
     ap.add_argument("--lang", choices=("es", "en"))
     ap.add_argument("--simulacro", action="store_true")
     ap.add_argument("--si", action="store_true")
+    ap.add_argument("--claude-md", action="store_true")
+    ap.add_argument("--hooks", action="store_true")
     a = ap.parse_args()
     lang = elegir_idioma(a.lang)
     t = T[lang]
@@ -173,7 +182,8 @@ def main():
     else:
         print(t["agregaria"].format(d=destino) + "\n")
         print("  " + texto.replace("\n", "\n  ")[:1200] + "\n  [...]\n")
-        if not a.simulacro and not sim and preguntar(t["q4"], None, t):
+        # sin consola (p. ej. lo corre Claude) preguntar() dice «no»: --claude-md es el sí explícito
+        if not a.simulacro and (a.claude_md or (not sim and preguntar(t["q4"], None, t))):
             claude.mkdir(parents=True, exist_ok=True)
             if destino.exists():
                 shutil.copy2(destino, destino.with_suffix(".md.bak"))
@@ -182,15 +192,32 @@ def main():
         else:
             print(t["no_mod"].format(p=str((claude_src / plantilla).relative_to(KIT)).replace("\\", "/")))
 
-    # 5. Hooks
+    # 5. Hooks: con --hooks se agregan solos (mismo Python que este instalador, copia .bak, sin duplicar)
     print("\n" + t["s5"].format(d=claude / "settings.json"))
-    print(f'   hook.py    -> PostToolUse  python "{RAIZ / "hook.py"}"')
-    print(f'   validar.py -> PostToolUse (Write|Edit)  python "{RAIZ / "validar.py"}"')
-    print(f'   diario.py  -> SessionEnd   python "{RAIZ / "diario.py"}"')
+    if a.hooks and not sim:
+        hechos = ajustes_hooks.aplicar(claude / "settings.json")
+        print("   agregados / added: %d" % len(hechos) + "".join("\n   %s -> %s" % (e, c) for e, _, c in hechos))
+    else:
+        for e, m, c in ajustes_hooks.plan({}):
+            print("   %s%s  %s" % (e, " (%s)" % m if m else "", c))
+        print("   (--hooks los agrega solo / adds them automatically)")
     print("   (opcionales, sin ahorro demostrado todavía / optional, no proven saving yet)")
-    print(f'   kit/hooks/inyectar_contexto.py -> UserPromptSubmit  python "{KIT / "hooks" / "inyectar_contexto.py"}"')
-    print(f'   kit/hooks/cierre.py            -> Stop             python "{KIT / "hooks" / "cierre.py"}"')
+    for nombre, evento in (("inyectar_contexto.py", "UserPromptSubmit"), ("cierre.py", "Stop")):
+        print("   kit/hooks/%s -> %s  %s" % (nombre, evento, ajustes_hooks.comando(KIT / "hooks" / nombre)))
+    if not sim:
+        guardar_boveda(boveda)
     print("\n" + t["fin"])
+
+
+def guardar_boveda(boveda):
+    """Recuerda la bóveda en preferencias.json: hook, servidor y contexto la encuentran sin MAPA_BOVEDA."""
+    try:
+        prefs = json.loads(Path(PREFS).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        prefs = {}
+    if prefs.get("boveda") != str(boveda):
+        prefs["boveda"] = str(boveda)
+        Path(PREFS).write_text(json.dumps(prefs, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
 if __name__ == "__main__":

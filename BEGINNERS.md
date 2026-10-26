@@ -54,13 +54,12 @@ This repo gives it **memory and order**:
 
 ```
 I'm a beginner. Install this repo for me step by step, explaining in plain words:
-1. Run `python kit/instalar.py --lang en --simulacro` and explain what it will create.
-2. If I agree, run it with `--si` to apply it.
-3. Add to my Claude Code settings.json the hooks the installer prints
-   (hook.py, validar.py and diario.py; NOT the optional ones). Make a backup first.
-   Use whichever Python command works on this computer (python or python3).
-4. Open the map with `python server.py --abrir`.
-5. Tell me which folder my vault is in so I can open it in Obsidian.
+1. Run `python kit/instalar.py --lang en --simulacro` (or python3 if python doesn't exist)
+   and explain what it will create and which block it will add to my CLAUDE.md.
+2. If I agree, run it with `--lang en --si --claude-md --hooks` to apply it
+   (it keeps .bak copies of what it touches and never overwrites anything).
+3. Open the map with `python server.py --abrir` and leave it running in the background.
+4. Tell me the full path of my vault so I can open it in Obsidian.
 Ask me before each step.
 ```
 
@@ -85,7 +84,8 @@ Ask me before each step.
 |---|---|
 | `python` is not recognized | Reinstall Python and tick "Add python.exe to PATH". On Mac use `python3` |
 | `claude` is not recognized | Close and reopen the terminal; if it persists, repeat step 3 |
-| The map opens but no spider moves | Restart Claude Code (hooks load at startup) and ask it to read a note |
+| The map opens but no spider moves | Close and reopen Claude Code (hooks load at startup) and ask it to read a note |
+| My vault is in another folder | Run the installer with `--boveda "path"`: it remembers it for good |
 | I'm not sure what I did | Run `claude` in the repo folder and say: "check whether the install went well" |
 
 More technical detail: [README.md](README.md) and [kit/README.md](kit/README.md).

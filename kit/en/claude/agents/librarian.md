@@ -25,7 +25,7 @@ If `reglas.json` exists next to the living map, the forbidden topic mixes are th
 - Use the syntax of the `obsidian-markdown` and `obsidian-bases` skills if you have them installed.
 
 ## Tasks
-**Process the inbox** (`00 Inbox`): first run `python kit/router_bandeja.py` (dry run, no
+**Process the inbox** (`00 Inbox`): first run `"{{PY}}" "{{REPO}}/kit/router_bandeja.py"` (dry run, no
 tokens) if it exists; whatever it marks `mover` can be applied with `--aplicar`. For the rest: decide
 `type` and `area`, add the 4 properties, link it to at least one existing note and move it to its
 folder. If it contains a lesson (what worked/failed, a rule), also create a learning.

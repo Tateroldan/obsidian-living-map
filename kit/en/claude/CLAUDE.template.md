@@ -6,7 +6,7 @@ My brain is the Obsidian vault `{{BOVEDA}}`. Everything we do grows there, conne
 **Neural set** = the whole system: the notes in `Learnings/` linked to each other (**Connects with:**) plus the skills and agents that feed on them (index in `AI/Skills.md`). If I say "connect the neural set", open `Home.md`, the project note and `AI/Skills.md`, and search for the learnings on the topic.
 
 ## When starting
-- **Start with a single call:** `python {{REPO}}/kit/contexto.py "<project and task keywords>"` prints the project state and the related learnings (no tokens). Don't read the whole vault or open the index if that is enough; open a full note only when you need more detail.
+- **Start with a single call:** `"{{PY}}" "{{REPO}}/kit/contexto.py" "<project and task keywords>"` prints the project state and the related learnings (no tokens). Don't read the whole vault or open the index if that is enough; open a full note only when you need more detail.
 - If the script doesn't find the project, open `Home.md` and from there only the project note and its "State for Claude"; before giving an opinion, search learnings with Grep in `Learnings/`.
 - **Before editing a project's code:** open `Home.md` → project note → "State for Claude" and confirm that the folder you are about to edit is the one the note says (the session folder is NOT proof). If it doesn't match, say so and ask before touching anything.
 - Vault rules: `_System/How this vault works.md` (only if you are going to write and don't know them).

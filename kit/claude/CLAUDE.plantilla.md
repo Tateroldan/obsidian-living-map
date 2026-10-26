@@ -6,7 +6,7 @@ Mi cerebro es la bóveda de Obsidian `{{BOVEDA}}`. Todo lo que hacemos crece ah�
 **Conjunto neuronal** = el sistema completo: las neuronas de `Aprendizajes/` enlazadas entre sí (**Conecta con:**) más las skills y agentes que se alimentan de ellas (índice en `IA/Skills.md`). Si digo «conecta el conjunto neuronal», abre `Inicio.md`, la nota del proyecto y `IA/Skills.md`, y busca las neuronas del tema.
 
 ## Al empezar
-- **Empieza con una sola llamada:** `python {{REPO}}/kit/contexto.py "<proyecto y palabras clave de la tarea>"` imprime el estado del proyecto y las neuronas relacionadas (sin tokens). No leas la bóveda entera ni abras el índice si eso ya basta; abre una nota completa solo si necesitas más detalle.
+- **Empieza con una sola llamada:** `"{{PY}}" "{{REPO}}/kit/contexto.py" "<proyecto y palabras clave de la tarea>"` imprime el estado del proyecto y las neuronas relacionadas (sin tokens). No leas la bóveda entera ni abras el índice si eso ya basta; abre una nota completa solo si necesitas más detalle.
 - Si el script no encuentra el proyecto, abre `Inicio.md` y de ahí solo la nota del proyecto y su «Estado para Claude»; antes de opinar busca neuronas con Grep en `Aprendizajes/`.
 - **Antes de editar código de un proyecto mío:** abre `Inicio.md` → nota del proyecto → «Estado para Claude» y confirma que la carpeta donde vas a editar es la que dice la nota (la carpeta de la sesión NO es prueba). Si no coincide, avisa y pregunta antes de tocar nada.
 - Reglas de la bóveda: `_Sistema/Cómo funciona esta bóveda.md` (solo si vas a escribir y no las conoces).

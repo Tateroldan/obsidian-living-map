@@ -24,7 +24,7 @@ Los valores permitidos viven en `reglas.json` (copia de `reglas.ejemplo.json`). 
 
 ## Flujo
 - **Capturar:** todo lo rápido va a `00 Bandeja` o a la nota diaria.
-- **Procesar (1 vez por semana):** `python kit/router_bandeja.py` (sin tokens, en simulacro) y lo ambiguo, al agente **bibliotecario**.
+- **Procesar (1 vez por semana):** `"{{PY}}" "{{REPO}}/kit/router_bandeja.py"` (sin tokens, en simulacro) y lo ambiguo, al agente **bibliotecario**.
 - **Encontrar:** el buscador, la vista gráfica y el mapa vivo.
 - **Cerrar:** lo terminado cambia a `estado: listo`; lo viejo pasa a `99 Archivo`. Nunca se borra.
 - **Salud:** `python salud.py` escribe un informe de huérfanas y notas nunca tocadas.

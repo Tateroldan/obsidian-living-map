@@ -5,6 +5,8 @@ from config import LOG, MARCA as BOVEDA, NOMBRE
 VERBO = {"Read": "read", "Write": "write", "Edit": "write", "Grep": "search", "Glob": "search"}
 QUOTED = re.compile(r"[\"']([^\"'\n]+)[\"']")
 BARE = re.compile(r"(?<![\"'])([^\s\"']*" + re.escape(NOMBRE) + r"[^\s\"';|&)]*)", re.I)
+DENTRO = re.compile(re.escape(BOVEDA) + r"(/|$)")  # «documents/boveda» sí, «documents/boveda2» no
+TOPE_LOG = 5 * 1024 * 1024  # al pasar 5 MB, events.jsonl pasa a events.jsonl.1 (el servidor ve el log truncado y reinicia)
 ESCRIBE = re.compile(r"(^|[^2&])>\s*\S|sed -i|cat >|Set-Content|Out-File|open\([^)]*[\"']w[\"']|\.write\(")
 
 
@@ -13,14 +15,15 @@ def rutas(tool, inp):
         return [inp.get(k) for k in ("file_path", "path") if inp.get(k)]
     cmd = inp.get("command", "")[:20000].replace("\\", "/")
     citadas = QUOTED.findall(cmd)
-    dirs = [d for d in citadas + BARE.findall(cmd) if BOVEDA in d.lower()]
+    sueltas = [d for d in BARE.findall(cmd) if not any(d in c for c in citadas)]  # sin repetir trozos de una ruta citada
+    dirs = [d for d in citadas + sueltas if DENTRO.search(d.lower())]
     if not dirs:
         return []
     out = [d for d in dirs if d.lower().endswith(".md")]
     base = next((d for d in dirs if not d.lower().endswith(".md")), dirs[0]).rstrip("/")
     # notas nombradas de forma relativa dentro del comando: 'Inicio.md', "Aprendizajes/X.md"
     # solo si la nota existe: evita eventos inventados como Boveda/~/.claude/CLAUDE.md
-    out += [base + "/" + m for m in citadas if m.lower().endswith(".md") and BOVEDA not in m.lower()
+    out += [base + "/" + m for m in citadas if m.lower().endswith(".md") and not DENTRO.search(m.lower())
             and os.path.exists(os.path.expandvars(os.path.expanduser(base + "/" + m)))]
     return out or [base]
 
@@ -37,11 +40,13 @@ def main():
     eventos = []
     for r in dict.fromkeys(rutas(tool, inp)):
         norm = r.replace("\\", "/")
-        if BOVEDA in norm.lower():
+        if DENTRO.search(norm.lower()):
             eventos.append({"t": time.time(), "verb": verbo, "tool": tool, "path": norm,
                             "session": str(data.get("session_id", ""))[:8]}
                            | ({"agente": ag} if ag else {}) | ({"agent_type": at} if at else {}))
     if eventos:
+        if os.path.exists(LOG) and os.path.getsize(LOG) > TOPE_LOG:
+            os.replace(LOG, LOG + ".1")
         with open(LOG, "a", encoding="utf-8") as f:
             f.write("".join(json.dumps(e, ensure_ascii=False) + "\n" for e in eventos))  # una sola escritura
 

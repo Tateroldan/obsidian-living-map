@@ -24,7 +24,7 @@ The allowed values live in `reglas.json` (copy of `reglas.ejemplo.en.json`, with
 
 ## Flow
 - **Capture:** anything quick goes to `00 Inbox` or to the daily note.
-- **Process (once a week):** `python kit/router_bandeja.py` (no tokens, dry run first) and the ambiguous ones go to the **librarian** agent.
+- **Process (once a week):** `"{{PY}}" "{{REPO}}/kit/router_bandeja.py"` (no tokens, dry run first) and the ambiguous ones go to the **librarian** agent.
 - **Find:** the search box, the graph view and the living map.
 - **Close:** finished things change to `status: done`; old things go to `99 Archive`. Nothing is deleted.
 - **Health:** `python salud.py` writes a report of orphan notes and never-touched notes.

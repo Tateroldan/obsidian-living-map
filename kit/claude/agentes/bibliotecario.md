@@ -25,7 +25,7 @@ Si existe `reglas.json` junto al mapa vivo, ahí están las mezclas de temas pro
 - Usa la sintaxis de las skills `obsidian-markdown` y `obsidian-bases` si las tienes instaladas.
 
 ## Tareas
-**Procesar la bandeja** (`00 Bandeja`): primero corre `python kit/router_bandeja.py` (simulacro, sin
+**Procesar la bandeja** (`00 Bandeja`): primero corre `"{{PY}}" "{{REPO}}/kit/router_bandeja.py"` (simulacro, sin
 tokens) si existe; lo que marque `mover` lo puedes aplicar con `--aplicar`. Para el resto: decide
 `tipo` y `area`, agrega las 4 propiedades, enlázala al menos a una nota existente y muévela a su
 carpeta. Si contiene una lección (qué funcionó/falló, una regla), crea además una neurona.

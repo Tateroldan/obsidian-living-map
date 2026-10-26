@@ -20,11 +20,13 @@ El mapa vivo muestra qué toca Claude; este kit le da a Claude **la forma de tra
 python kit/instalar.py --simulacro     # ver qué haría, sin escribir nada
 python kit/instalar.py                 # paso a paso, pregunta antes de cada grupo
 python kit/instalar.py --lang en       # kit en inglés (carpetas, propiedades y mensajes en inglés)
+python kit/instalar.py --si --claude-md --hooks   # todo sin preguntas (después de revisar --simulacro)
 ```
 
 - La bóveda de ejemplo se crea en `MAPA_BOVEDA` (o `~/Documents/Boveda`). Si la carpeta ya tiene notas, solo se agregan los archivos que falten.
 - El bloque de `CLAUDE.md` se muestra y **siempre** se pregunta; antes se guarda una copia `.bak`.
-- Los hooks no se editan solos: el instalador imprime las líneas para `settings.json`.
+- Los hooks se agregan a `settings.json` solo con `--hooks` (copia `.bak`, sin duplicar y con el mismo Python del instalador); si no, el instalador imprime las líneas.
+- La carpeta de la bóveda (`--boveda`) queda guardada en `preferencias.json`: el hook, el servidor y `contexto.py` la encuentran sin variables de entorno.
 
 ## Cómo crece solo
 

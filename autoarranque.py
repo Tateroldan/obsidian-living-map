@@ -6,10 +6,9 @@ preferencias.json (no se sube). Después se cambia con:
 """
 import json, os, subprocess, sys
 
-from config import AQUI
+from config import AQUI, PREFS
 from reglas import M
 
-PREFS = os.path.join(AQUI, "preferencias.json")
 NOMBRE_VBS = "obsidian-living-map.vbs"
 
 
