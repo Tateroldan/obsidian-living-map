@@ -97,7 +97,8 @@ def copiar_arbol(origen, destino, boveda, simulacro, sustituir_marcas=True):
             continue
         dst.parent.mkdir(parents=True, exist_ok=True)
         if ruta.suffix in (".md", ".json") and sustituir_marcas:
-            dst.write_text(sustituir(ruta.read_text(encoding="utf-8"), boveda), encoding="utf-8", newline="\n")
+            with open(dst, "w", encoding="utf-8", newline="\n") as f:  # write_text(newline=) no existe en Python 3.9
+                f.write(sustituir(ruta.read_text(encoding="utf-8"), boveda))
         else:
             shutil.copy2(ruta, dst)
     return hechos, omitidos

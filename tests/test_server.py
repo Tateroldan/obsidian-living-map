@@ -17,20 +17,27 @@ class Servidor(Aislada):
         self.nota("Proyecto.md", "---\ntipo: proyecto\n---\nVolver a [[Inicio]]\n")
         self.puerto = puerto_libre()
         self.env["MAPA_PUERTO"] = str(self.puerto)
+        self.salida = open(self.tmp / "server.log", "w+b")
         self.proc = subprocess.Popen([sys.executable, str(RAIZ / "server.py")], env=self.env,
-                                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                                     stdout=self.salida, stderr=subprocess.STDOUT)
         for _ in range(100):  # hasta 10 s para que escuche
+            if self.proc.poll() is not None:
+                break
             try:
                 socket.create_connection(("127.0.0.1", self.puerto), timeout=0.2).close()
-                break
+                return
             except OSError:
                 time.sleep(0.1)
-        else:
-            self.fail("el servidor no arrancó")
+        self.salida.seek(0)
+        log = self.salida.read().decode("utf-8", "replace")
+        self.tearDown()  # unittest no llama tearDown si setUp falla
+        self.fail("el servidor no arrancó (código %s):\n%s" % (self.proc.returncode, log))
 
     def tearDown(self):
-        self.proc.terminate()
-        self.proc.wait(timeout=10)
+        if self.proc.poll() is None:
+            self.proc.terminate()
+            self.proc.wait(timeout=10)
+        self.salida.close()
         super().tearDown()
 
     def pedir(self, ruta, host=None):
