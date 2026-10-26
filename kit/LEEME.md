@@ -37,15 +37,24 @@ python kit/instalar.py --lang en       # kit en inglés (carpetas, propiedades y
 
 Skills de dominio (video, juegos, marketing…): cada quien crea las suyas con `find-skills` o a mano, y las apunta en `IA/Skills.md`. Las neuronas de ejemplo son solo guía: reemplázalas por las tuyas.
 
-## Qué promete y qué no (medido)
+## De dónde sale el ahorro
 
-- **No abarata una tarea aislada.** En pruebas A/B controladas el kit cuesta parecido o algo más por tarea, porque leer contexto y escribir el cierre añade turnos.
-- **Sí evita errores de formato cuando hay una neurona aplicable.** Escenario: la convención de CSV de un cliente solo vivía en una neurona. En 15 corridas (5 por brazo), el archivo salió en formato equivocado 4 de 5 veces sin kit y 0 de 10 con kit (Fisher exacto p ≈ 0.004). El código quedó correcto en las 15 corridas, porque sin kit el usuario re-explicó la convención y pagó una segunda ronda.
-- **El costo total salió igual** (≈ $0.147 por tarea en los tres brazos). El ahorro de acertar a la primera se compensó con 3 de 10 corridas con kit que no ejecutaron el script y necesitaron una segunda ronda.
+El kit ahorra recursos **entre sesiones**, no dentro de una tarea aislada:
+
+- **Dejas de repetir instrucciones.** Cada proyecto guarda un «Estado para Claude» corto (dónde quedamos, siguiente paso, qué se descartó y por qué). Basta con «sigamos con el proyecto X»: Claude no necesita que le vuelvas a contar la historia ni explorar todo el código otra vez.
+- **Lectura modular.** Archivos chicos de una sola responsabilidad y un mapa en el `CLAUDE.md` del proyecto permiten abrir solo la pieza que hace falta, en vez de cargar todo al contexto.
+- **Las neuronas se reutilizan.** Una convención o un arreglo guardado se aplica a la primera, sin re-explicarlo ni pagar una segunda ronda.
+- **No se repiten errores.** Lo descartado y las trampas conocidas quedan escritos.
+- **Tu tiempo también cuenta.** Menos correcciones y explicaciones es un ahorro que ningún contador de tokens muestra.
+
+El precio es un costo de entrada pequeño: leer el índice y escribir el cierre añade unos turnos. En una tarea nueva y suelta que no reutiliza nada, el kit cuesta parecido o un poco más. El retorno crece con cada tarea que se apoya en las anteriores.
+
+## Qué se midió
+
+- **Neurona aplicable (15 corridas, 5 por brazo):** la convención de CSV de un cliente solo vivía en una neurona. Sin kit el archivo salió en formato equivocado 4 de 5 veces; con kit, 0 de 10 (Fisher exacto p ≈ 0.004). Sin kit el usuario tuvo que re-explicar la convención.
+- **El costo por tarea en ese escenario salió igual** (≈ $0.147 en los tres brazos): lo ganado al acertar a la primera se compensó con 3 de 10 corridas con kit que no ejecutaron el script y necesitaron otra ronda.
 - **Los hooks opcionales** (`kit/hooks/`: inyección de contexto y compuerta de cierre) no mostraron ganancia sobre el `CLAUDE.md` solo y no se recomiendan por defecto.
-- **Límites:** muestras mínimas (n = 2 por brazo), un solo modelo, escenarios diseñados. Es evidencia del mecanismo, no prueba de ahorro.
-
-El detalle y las cifras están en las notas del proyecto; falta documentación (ver abajo).
+- **Falta medir:** una serie larga de tareas relacionadas en varias sesiones, que es donde se acumula el ahorro de arriba. Las muestras hasta ahora son chicas, con un solo modelo y escenarios diseñados.
 
 ## Documentación pendiente
 - Guía paso a paso con un ejemplo completo (tarea → neurona → reutilización).

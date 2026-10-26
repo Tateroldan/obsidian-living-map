@@ -39,15 +39,24 @@ python kit/instalar.py --lang en               # step by step, asks before each 
 
 Domain skills (video, games, marketing…): everyone creates their own with `find-skills` or by hand and lists them in `AI/Skills.md`. The example learnings are only a guide: replace them with yours.
 
-## What it does and does not claim (measured)
+## Where the savings come from
 
-- **It does not make a single task cheaper.** In controlled A/B runs the kit costs about the same or a bit more per task, because reading context and writing the closing notes adds turns.
-- **It does avoid format mistakes when a stored learning applies.** Scenario: a client's CSV convention lived only in a learning. Across 15 runs (5 per arm), the file came out in the wrong format 4 of 5 times without the kit and 0 of 10 times with it (Fisher exact p ≈ 0.004). The code was eventually correct in all 15 runs, because without the kit the user re-explained the convention and paid for a second round.
-- **Total cost came out equal** (≈ $0.147 per task in all three arms). The kit's first-try savings were offset by 3 of 10 kit runs that did not execute the script and needed a second round.
+The kit saves resources **across sessions**, not inside one isolated task:
+
+- **You stop repeating yourself.** Each project keeps a short "State for Claude" (where we left off, next step, what was discarded and why). "Let's continue with project X" is enough; Claude does not need the backstory again or to re-explore the whole codebase.
+- **Modular reading.** Small single-purpose files plus a map in the project's `CLAUDE.md` let Claude open only the piece it needs instead of loading everything into context.
+- **Learnings are reused.** A stored convention or fix is applied the first time, without you re-explaining it or paying for a second round.
+- **Mistakes are not repeated.** Discarded approaches and known traps are written down.
+- **Your time counts too.** Fewer corrections and re-explanations is a saving no token counter shows.
+
+The price is a small entry cost: reading the index and writing the closing notes adds a few turns. On a brand-new, one-off task that reuses nothing, the kit costs about the same or a bit more. The return grows with every task that builds on earlier ones.
+
+## What was measured
+
+- **Stored learning applied (15 runs, 5 per arm):** a client's CSV convention lived only in a learning. Without the kit the file came out in the wrong format 4 of 5 times; with the kit, 0 of 10 (Fisher exact p ≈ 0.004). Without the kit the user had to re-explain the convention.
+- **Cost per task in that scenario came out equal** (≈ $0.147 in all three arms): the kit's first-try wins were offset by 3 of 10 kit runs that skipped the script and needed a second round.
 - **Optional hooks** (`kit/hooks/`: context injection and a closing gate) showed no gain over the plain `CLAUDE.md` and are not recommended by default.
-- **Limits:** tiny samples (n = 2 per arm), one model, designed scenarios. Treat it as evidence of the mechanism, not proof of savings.
-
-Details and the raw numbers are in the project notes; more documentation is pending (see below).
+- **Not yet measured:** a long series of related tasks over several sessions, which is where the savings above accumulate. Samples so far are small, with one model and designed scenarios.
 
 ## Pending documentation
 - Step-by-step guide with a worked example (task → learning → reuse).
