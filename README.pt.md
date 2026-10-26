@@ -32,6 +32,8 @@ Mapa 3D do seu cofre do Obsidian em que uma aranha caminha pelas notas que o Cla
 }
 ```
 
+Ou deixe o instalador fazer isso: `python kit/instalar.py --hooks` (guarda cópia `.bak`, não duplica e usa o mesmo Python).
+
 Opcionais: `validar.py` (PostToolUse `Write|Edit`; avisa sobre propriedades ausentes, links quebrados ou segredos colados) e `diario.py` (SessionEnd; resume a sessão na nota diária).
 
 Na primeira vez que o abrir por um console, ele pergunta uma única vez se deve iniciar com o Windows. Mude depois com `python server.py --autoarranque on|off|estado`.

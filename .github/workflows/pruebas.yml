@@ -38,3 +38,22 @@ jobs:
           node-version: "20"
       - name: Sintaxis de los .js del mapa
         run: for f in *.js; do node --check "$f" || exit 1; done
+      - name: Idiomas completos y sin claves de sobra
+        run: node tests/revisar_i18n.js
+
+  # La guía para principiantes, tal cual, en una máquina recién creada (rutas reales ~/Documents/Boveda y ~/.claude)
+  maquina-limpia:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        lang: [es, en]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Instalar como un principiante y comprobar mapa y araña
+        run: python tests/maquina_limpia.py ${{ matrix.lang }}

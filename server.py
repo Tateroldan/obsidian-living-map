@@ -71,6 +71,20 @@ _ev = {"off": 0, "n": 0, "items": []}
 _ev_lock = threading.Lock()
 
 
+BASE = BOVEDA.replace("\\", "/").rstrip("/").lower() + "/"
+COLA = "/" + "/".join(BASE.rstrip("/").split("/")[-2:]) + "/"  # «/padre/bóveda/»: rutas como /c/... o ~/...
+
+
+def relativa(p):
+    """Ruta de un evento -> id de nota relativo a la bóveda (antes estaba fijo «documents/boveda»)."""
+    q = p.replace("\\", "/")
+    for marca in (BASE, COLA):
+        i = q.lower().find(marca)
+        if i >= 0:
+            return q[i + len(marca):]
+    return q
+
+
 def eventos(desde):
     with _ev_lock:  # varias pestañas piden a la vez
         return _eventos(desde)
@@ -93,8 +107,7 @@ def _eventos(desde):
         except (ValueError, KeyError):
             _ev["items"].append(None)
             continue
-        i = p.lower().find("documents/boveda")
-        rel = p[i + len("documents/boveda"):].strip("/") if i >= 0 else p
+        rel = relativa(p)
         e["id"] = rel[:-3] if rel.endswith(".md") else rel
         _ev["items"].append(e)
     _ev["off"] += fin
@@ -158,7 +171,26 @@ class H(SimpleHTTPRequestHandler):
         return super().do_GET()
 
 
+AYUDA = """Mapa vivo: servidor local en http://127.0.0.1:{p} / Living map: local server at http://127.0.0.1:{p}
+
+  python server.py                          arranca el servidor / starts the server
+  python server.py --abrir                  arranca y abre el navegador / starts and opens the browser
+  python server.py --autoarranque on|off|estado   arranque con Windows / start with Windows
+  python server.py --help                   esta ayuda / this help
+
+Variables: MAPA_BOVEDA (bóveda / vault), MAPA_PUERTO (puerto / port), MAPA_LOG, MAPA_PREFS, MAPA_DECISIONES
+Bóveda actual / current vault: {b}"""
+
+
 if __name__ == "__main__":
+    for flujo in (sys.stdout, sys.stderr):  # consolas cp1252 de Windows no soportan acentos
+        try:
+            flujo.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+    if "--help" in sys.argv or "-h" in sys.argv:
+        print(AYUDA.format(p=PUERTO, b=BOVEDA))
+        sys.exit(0)
     import autoarranque
     if "--autoarranque" in sys.argv:
         i = sys.argv.index("--autoarranque")

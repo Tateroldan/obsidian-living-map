@@ -69,10 +69,14 @@ class Servidor(Aislada):
         self.assertEqual(status, 200)
         self.assertIn(b"<html", cuerpo.lower())
 
-    def test_eventos_responde_json(self):
-        status, cuerpo = self.pedir("/events?desde=0")
+    def test_eventos_con_id_relativo_a_la_boveda(self):
+        # la bóveda de la prueba NO es ~/Documents/Boveda: el id debe salir igual relativo
+        self.log.write_text(json.dumps({"t": 1, "verb": "read", "tool": "Read",
+                                        "path": (self.boveda / "Inicio.md").as_posix()}) + "\n", encoding="utf-8")
+        status, cuerpo = self.pedir("/events?since=0")
         self.assertEqual(status, 200)
-        json.loads(cuerpo)
+        ev = json.loads(cuerpo)["events"]
+        self.assertEqual([e["id"] for e in ev], ["Inicio"])
 
 
 if __name__ == "__main__":

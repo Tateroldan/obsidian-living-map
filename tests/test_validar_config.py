@@ -27,6 +27,14 @@ class Validar(Aislada):
         self.assertEqual(self.correr("validar.py", entrada=b"{").returncode, 0)
 
 
+class AyudaServidor(Aislada):
+    def test_help_no_arranca_el_servidor(self):
+        p = self.correr("server.py", "--help")
+        self.assertEqual(p.returncode, 0, p.err)
+        self.assertIn("--abrir", p.out)
+        self.assertIn(str(self.boveda), p.out)
+
+
 class Config(Aislada):
     def boveda_vista(self, env):
         p = self.correr("tests/_ver_config.py", env=env)

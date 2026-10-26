@@ -190,6 +190,15 @@ START = {'en': '**New to this?** Follow the [step-by-step beginner guide](BEGINN
  'it': '**Parti da zero?** Segui la [guida passo passo per principianti](BEGINNERS.md) (in inglese; [in spagnolo](PRINCIPIANTES.md)).',
  'ja': '**初めての方へ:** [初心者向けステップバイステップガイド](BEGINNERS.md)(英語。[スペイン語版](PRINCIPIANTES.md))をどうぞ。プログラミング不要です。',
  'zh': '**新手?** 请按照[分步新手指南](BEGINNERS.md)操作(英文;[西班牙文版](PRINCIPIANTES.md)),无需编程。'}
+# Paso 3 sin editar JSON: el instalador agrega los hooks solo
+HOOKS = {'en': 'Or let the installer do it: `python kit/instalar.py --hooks` (keeps a `.bak` copy, never duplicates, uses the same Python).',
+ 'es': 'O deja que lo haga el instalador: `python kit/instalar.py --hooks` (guarda copia `.bak`, no duplica y usa el mismo Python).',
+ 'pt': 'Ou deixe o instalador fazer isso: `python kit/instalar.py --hooks` (guarda cópia `.bak`, não duplica e usa o mesmo Python).',
+ 'fr': "Ou laissez l'installeur le faire : `python kit/instalar.py --hooks` (copie `.bak`, sans doublons, même Python).",
+ 'de': 'Oder lass es den Installer machen: `python kit/instalar.py --hooks` (legt eine `.bak`-Kopie an, keine Duplikate, gleiches Python).',
+ 'it': "Oppure lascia fare all'installer: `python kit/instalar.py --hooks` (copia `.bak`, nessun duplicato, stesso Python).",
+ 'ja': 'インストーラーに任せることもできます: `python kit/instalar.py --hooks`(`.bak` を保存し、重複せず、同じ Python を使います)。',
+ 'zh': '也可以交给安装程序:`python kit/instalar.py --hooks`(保留 `.bak` 备份、不会重复、使用同一个 Python)。'}
 THIRD = ["d3 7.9.0 (ISC), `vendor/`", "Departure Mono v1.500 (SIL OFL), `fuentes/`"]
 
 for code, nombre, fname in NAMES:
@@ -217,6 +226,8 @@ for code, nombre, fname in NAMES:
 3. {t['s3']}
 
 {JSON}
+
+{HOOKS[code]}
 
 {t['opt']}
 
