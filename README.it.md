@@ -1,5 +1,7 @@
 # Obsidian Living Map
 
+[![pruebas](https://github.com/Tateroldan/obsidian-living-map/actions/workflows/pruebas.yml/badge.svg)](https://github.com/Tateroldan/obsidian-living-map/actions/workflows/pruebas.yml)
+
 [English](README.md) · [Español](README.es.md) · [Português](README.pt.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · Italiano · [日本語](README.ja.md) · [中文](README.zh.md)
 
 Mappa 3D del tuo vault di Obsidian in cui un ragno cammina sulle note che Claude Code legge (ciano), scrive (ambra) o cerca (viola). Non consuma token: un hook `PostToolUse` registra ogni accesso in `events.jsonl` e la pagina lo interroga ogni 0,8 s. Solo libreria standard di Python, nessun `pip install`.

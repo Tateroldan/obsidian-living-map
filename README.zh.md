@@ -1,5 +1,7 @@
 # Obsidian Living Map
 
+[![pruebas](https://github.com/Tateroldan/obsidian-living-map/actions/workflows/pruebas.yml/badge.svg)](https://github.com/Tateroldan/obsidian-living-map/actions/workflows/pruebas.yml)
+
 [English](README.md) · [Español](README.es.md) · [Português](README.pt.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · 中文
 
 你的 Obsidian 知识库的 3D 地图:一只蜘蛛在 Claude Code 读取(青色)、写入(琥珀色)或搜索(紫色)的笔记上行走。不消耗 token:`PostToolUse` 钩子把每次访问记录到 `events.jsonl`,页面每 0.8 秒读取一次。仅使用 Python 标准库,无需 `pip install`。

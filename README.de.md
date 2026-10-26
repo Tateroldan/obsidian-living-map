@@ -1,5 +1,7 @@
 # Obsidian Living Map
 
+[![pruebas](https://github.com/Tateroldan/obsidian-living-map/actions/workflows/pruebas.yml/badge.svg)](https://github.com/Tateroldan/obsidian-living-map/actions/workflows/pruebas.yml)
+
 [English](README.md) · [Español](README.es.md) · [Português](README.pt.md) · [Français](README.fr.md) · Deutsch · [Italiano](README.it.md) · [日本語](README.ja.md) · [中文](README.zh.md)
 
 3D-Karte deines Obsidian-Vaults, auf der eine Spinne über die Notizen läuft, die Claude Code liest (Cyan), schreibt (Bernstein) oder durchsucht (Violett). Sie kostet keine Tokens: Ein `PostToolUse`-Hook protokolliert jeden Zugriff in `events.jsonl`, und die Seite fragt ihn alle 0,8 s ab. Nur die Python-Standardbibliothek, kein `pip install`.

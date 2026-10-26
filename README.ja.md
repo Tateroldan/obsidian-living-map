@@ -1,5 +1,7 @@
 # Obsidian Living Map
 
+[![pruebas](https://github.com/Tateroldan/obsidian-living-map/actions/workflows/pruebas.yml/badge.svg)](https://github.com/Tateroldan/obsidian-living-map/actions/workflows/pruebas.yml)
+
 [English](README.md) · [Español](README.es.md) · [Português](README.pt.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Italiano](README.it.md) · 日本語 · [中文](README.zh.md)
 
 Claude Code が読む(シアン)・書く(琥珀)・検索する(紫)ノートの上をクモが歩く、Obsidian ボールトの 3D マップです。トークンは消費しません。`PostToolUse` フックがすべてのアクセスを `events.jsonl` に記録し、ページが 0.8 秒ごとに読み取ります。Python 標準ライブラリのみで、`pip install` は不要です。

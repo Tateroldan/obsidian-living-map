@@ -1,0 +1,40 @@
+# Pruebas en cada push y pull request: Windows, macOS y Linux, con el Python más viejo soportado y el más nuevo.
+name: pruebas
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ["3.9", "3.13"]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Compilar todos los .py
+        run: python -m compileall -q -x "_respaldo" .
+      - name: Pruebas
+        run: python -m unittest discover -s tests -v
+
+  javascript:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Sintaxis de los .js del mapa
+        run: for f in *.js; do node --check "$f" || exit 1; done

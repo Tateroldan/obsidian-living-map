@@ -1,5 +1,7 @@
 # Obsidian Living Map
 
+[![pruebas](https://github.com/Tateroldan/obsidian-living-map/actions/workflows/pruebas.yml/badge.svg)](https://github.com/Tateroldan/obsidian-living-map/actions/workflows/pruebas.yml)
+
 [English](README.md) · [Español](README.es.md) · [Português](README.pt.md) · Français · [Deutsch](README.de.md) · [Italiano](README.it.md) · [日本語](README.ja.md) · [中文](README.zh.md)
 
 Carte 3D de votre coffre Obsidian où une araignée parcourt les notes que Claude Code lit (cyan), écrit (ambre) ou recherche (violet). Elle ne consomme aucun token : un hook `PostToolUse` consigne chaque accès dans `events.jsonl` et la page l'interroge toutes les 0,8 s. Bibliothèque standard Python uniquement, sans `pip install`.

@@ -3,6 +3,7 @@
 Variables de entorno (opcionales):
   MAPA_BOVEDA  carpeta de la bóveda (si falta: la de preferencias.json; si no, ~/Documents/Boveda)
   MAPA_PUERTO  puerto del servidor local (por defecto 8765)
+  MAPA_PREFS   archivo de preferencias (por defecto preferencias.json junto al código; útil para pruebas)
   MAPA_LOG     archivo de eventos (por defecto events.jsonl junto al código; útil para pruebas)
   MAPA_DECISIONES  nombre de la nota con casillas abiertas (por defecto «Decisiones pendientes»)
 """
@@ -11,7 +12,7 @@ import json, os
 from reglas import V
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-PREFS = os.path.join(AQUI, "preferencias.json")  # no se sube; lo escriben kit/instalar.py y autoarranque.py
+PREFS = os.environ.get("MAPA_PREFS") or os.path.join(AQUI, "preferencias.json")  # no se sube; lo escriben kit/instalar.py y autoarranque.py
 
 
 def _boveda_guardada():

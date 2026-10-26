@@ -198,6 +198,8 @@ for code, nombre, fname in NAMES:
     rows = "\n".join("| `%s` | %s |" % (f, r) for f, r in zip(FILES, t["rows"]))
     doc = f"""# Obsidian Living Map
 
+[![pruebas](https://github.com/Tateroldan/obsidian-living-map/actions/workflows/pruebas.yml/badge.svg)](https://github.com/Tateroldan/obsidian-living-map/actions/workflows/pruebas.yml)
+
 {nav}
 
 {t['intro']}
