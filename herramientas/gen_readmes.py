@@ -146,6 +146,50 @@ FILES = ["reglas.ejemplo.json", "config.py", "server.py", "hook.py", "salud.py",
 AUTO = {'en': 'The first time you open it from a console it asks, once, whether to start automatically with Windows. Change it later with `python server.py --autoarranque on|off|estado`.', 'es': 'La primera vez que lo abres desde una consola pregunta, una sola vez, si quieres que arranque con Windows. Cámbialo después con `python server.py --autoarranque on|off|estado`.', 'pt': 'Na primeira vez que o abrir por um console, ele pergunta uma única vez se deve iniciar com o Windows. Mude depois com `python server.py --autoarranque on|off|estado`.', 'fr': "La première fois que vous l'ouvrez depuis une console, il demande une seule fois s'il doit démarrer avec Windows. Modifiez-le ensuite avec `python server.py --autoarranque on|off|estado`.", 'de': 'Beim ersten Start aus einer Konsole wird einmalig gefragt, ob der Server mit Windows starten soll. Später änderbar mit `python server.py --autoarranque on|off|estado`.', 'it': 'La prima volta che lo apri da una console chiede, una sola volta, se avviarsi con Windows. Cambialo dopo con `python server.py --autoarranque on|off|estado`.', 'ja': 'コンソールから初めて開くと、Windows 起動時に自動で開始するかどうかを一度だけ尋ねます。後から `python server.py --autoarranque on|off|estado` で変更できます。', 'zh': '首次从控制台打开时,会询问一次是否随 Windows 自动启动。之后可用 `python server.py --autoarranque on|off|estado` 更改。'}
 SUP = {'en': ('Support', 'If it is useful to you, you can [buy me a coffee on Ko-fi](https://ko-fi.com/tateroldan) ☕'), 'es': ('Apoyo', 'Si te sirve, puedes [invitarme un café en Ko-fi](https://ko-fi.com/tateroldan) ☕'), 'pt': ('Apoio', 'Se for útil para você, pode [me pagar um café no Ko-fi](https://ko-fi.com/tateroldan) ☕'), 'fr': ('Soutien', "Si cela vous est utile, vous pouvez [m'offrir un café sur Ko-fi](https://ko-fi.com/tateroldan) ☕"), 'de': ('Unterstützung', 'Wenn es dir nützt, kannst du mir [auf Ko-fi einen Kaffee spendieren](https://ko-fi.com/tateroldan) ☕'), 'it': ('Supporto', 'Se ti è utile, puoi [offrirmi un caffè su Ko-fi](https://ko-fi.com/tateroldan) ☕'), 'ja': ('サポート', '役に立ったら、[Ko-fi でコーヒーをおごる](https://ko-fi.com/tateroldan)こともできます ☕'), 'zh': ('支持', '如果它对你有帮助,可以在 [Ko-fi 请我喝杯咖啡](https://ko-fi.com/tateroldan) ☕')}
 KIT = {'en': ('Kit (the self-learning part)', 'The map shows what Claude touches; `kit/` gives Claude the working method that makes the vault grow on its own: rules for starting and finishing tasks, linked notes ("neurons"), a librarian agent, a zero-token inbox router, a closing skill and a sample vault. No one\'s personal notes are included. Preview with `python kit/instalar.py --simulacro` (`--lang en` / `--lang es`). Details: [kit/LEEME.md](kit/LEEME.md).'), 'es': ('Kit (la parte autodidacta)', 'El mapa muestra qué toca Claude; `kit/` le da a Claude la forma de trabajar que hace crecer la bóveda sola: reglas para empezar y terminar tareas, notas enlazadas («neuronas»), un agente bibliotecario, un router de bandeja sin tokens, una skill de cierre y una bóveda de ejemplo. No incluye notas personales de nadie. Vista previa con `python kit/instalar.py --simulacro` (`--lang en` / `--lang es`). Detalle: [kit/LEEME.md](kit/LEEME.md).'), 'pt': ('Kit (a parte autodidata)', 'O mapa mostra o que o Claude toca; `kit/` dá ao Claude o método de trabalho que faz o cofre crescer sozinho: regras para começar e terminar tarefas, notas ligadas («neurônios»), um agente bibliotecário, um roteador de caixa de entrada sem tokens, uma skill de encerramento e um cofre de exemplo. Não inclui notas pessoais de ninguém. Prévia com `python kit/instalar.py --simulacro` (`--lang en` / `--lang es`). Detalhes: [kit/LEEME.md](kit/LEEME.md).'), 'fr': ('Kit (la partie autodidacte)', "La carte montre ce que Claude touche ; `kit/` lui donne la méthode de travail qui fait grandir le coffre tout seul : règles pour commencer et finir les tâches, notes liées (« neurones »), un agent bibliothécaire, un routeur de boîte de réception sans tokens, une skill de clôture et un coffre d'exemple. Aucune note personnelle n'est incluse. Aperçu avec `python kit/instalar.py --simulacro` (`--lang en` / `--lang es`). Détails : [kit/LEEME.md](kit/LEEME.md)."), 'de': ('Kit (der selbstlernende Teil)', 'Die Karte zeigt, was Claude berührt; `kit/` gibt Claude die Arbeitsweise, mit der der Vault von selbst wächst: Regeln für Beginn und Abschluss von Aufgaben, verknüpfte Notizen („Neuronen“), ein Bibliothekar-Agent, ein Posteingangs-Router ohne Tokens, eine Abschluss-Skill und ein Beispiel-Vault. Keine persönlichen Notizen sind enthalten. Vorschau mit `python kit/instalar.py --simulacro` (`--lang en` / `--lang es`). Details: [kit/LEEME.md](kit/LEEME.md).'), 'it': ('Kit (la parte autodidatta)', 'La mappa mostra cosa tocca Claude; `kit/` gli dà il metodo di lavoro che fa crescere il vault da solo: regole per iniziare e chiudere i compiti, note collegate («neuroni»), un agente bibliotecario, un router della casella senza token, una skill di chiusura e un vault di esempio. Nessuna nota personale inclusa. Anteprima con `python kit/instalar.py --simulacro` (`--lang en` / `--lang es`). Dettagli: [kit/LEEME.md](kit/LEEME.md).'), 'ja': ('キット(自己学習の部分)', 'マップは Claude が何に触れるかを見せ、`kit/` はボールトが自然に育つ作業方法を Claude に与えます。タスク開始・終了のルール、リンクされたノート(「ニューロン」)、司書エージェント、トークン不要の受信箱ルーター、終了スキル、サンプルボールトが含まれます。個人のノートは一切含まれません。`python kit/instalar.py --simulacro` (`--lang en` / `--lang es`) でプレビューできます。詳細: [kit/LEEME.md](kit/LEEME.md)。'), 'zh': ('套件(自学习部分)', '地图展示 Claude 触及了什么;`kit/` 则赋予 Claude 让知识库自行生长的工作方法:任务开始与结束的规则、相互链接的笔记(“神经元”)、图书管理员代理、无需 token 的收件箱路由器、收尾技能和示例知识库。不包含任何人的个人笔记。可用 `python kit/instalar.py --simulacro` (`--lang en` / `--lang es`) 预览。详情:[kit/LEEME.md](kit/LEEME.md)。')}
+# Requisitos: van antes de instalar (Obsidian, Python y Claude Code)
+REQ = {
+'en': ('Requirements', [
+  '**Obsidian** (free): download it from [obsidian.md](https://obsidian.md), then use *Open folder as vault* and pick your vault folder. If you use the kit, pick the folder it creates (`MAPA_BOVEDA`, default `~/Documents/Boveda`). Clicking a note in the map opens it in Obsidian.',
+  '**Python 3.9+**: standard library only, no `pip install`.',
+  '**[Claude Code](https://claude.com/claude-code)**: the hook records what it reads and writes; without it the map shows the vault but no spider moves.']),
+'es': ('Requisitos', [
+  '**Obsidian** (gratis): descárgalo de [obsidian.md](https://obsidian.md) y usa *Open folder as vault* («Abrir carpeta como bóveda») con la carpeta de tu bóveda. Si usas el kit, elige la carpeta que crea (`MAPA_BOVEDA`, por defecto `~/Documents/Boveda`). Al hacer clic en una nota del mapa, se abre en Obsidian.',
+  '**Python 3.9+**: solo biblioteca estándar, sin `pip install`.',
+  '**[Claude Code](https://claude.com/claude-code)**: el hook registra lo que lee y escribe; sin él, el mapa muestra la bóveda pero ninguna araña se mueve.']),
+'pt': ('Requisitos', [
+  '**Obsidian** (gratuito): baixe em [obsidian.md](https://obsidian.md) e use *Open folder as vault* com a pasta do seu cofre. Se usar o kit, escolha a pasta que ele cria (`MAPA_BOVEDA`, padrão `~/Documents/Boveda`). Clicar numa nota do mapa a abre no Obsidian.',
+  '**Python 3.9+**: só a biblioteca padrão, sem `pip install`.',
+  '**[Claude Code](https://claude.com/claude-code)**: o hook registra o que ele lê e escreve; sem ele, o mapa mostra o cofre mas nenhuma aranha se move.']),
+'fr': ('Prérequis', [
+  "**Obsidian** (gratuit) : téléchargez-le sur [obsidian.md](https://obsidian.md), puis *Open folder as vault* avec le dossier de votre coffre. Avec le kit, choisissez le dossier qu'il crée (`MAPA_BOVEDA`, par défaut `~/Documents/Boveda`). Un clic sur une note de la carte l'ouvre dans Obsidian.",
+  '**Python 3.9+** : bibliothèque standard uniquement, sans `pip install`.',
+  "**[Claude Code](https://claude.com/claude-code)** : le hook enregistre ce qu'il lit et écrit ; sans lui, la carte montre le coffre mais aucune araignée ne bouge."]),
+'de': ('Voraussetzungen', [
+  '**Obsidian** (kostenlos): von [obsidian.md](https://obsidian.md) herunterladen und mit *Open folder as vault* deinen Vault-Ordner öffnen. Mit dem Kit wählst du den Ordner, den es anlegt (`MAPA_BOVEDA`, Standard `~/Documents/Boveda`). Ein Klick auf eine Notiz in der Karte öffnet sie in Obsidian.',
+  '**Python 3.9+**: nur Standardbibliothek, kein `pip install`.',
+  '**[Claude Code](https://claude.com/claude-code)**: der Hook protokolliert, was es liest und schreibt; ohne ihn zeigt die Karte den Vault, aber keine Spinne bewegt sich.']),
+'it': ('Requisiti', [
+  '**Obsidian** (gratuito): scaricalo da [obsidian.md](https://obsidian.md) e usa *Open folder as vault* con la cartella del tuo vault. Con il kit, scegli la cartella che crea (`MAPA_BOVEDA`, predefinita `~/Documents/Boveda`). Un clic su una nota della mappa la apre in Obsidian.',
+  '**Python 3.9+**: solo libreria standard, nessun `pip install`.',
+  '**[Claude Code](https://claude.com/claude-code)**: il hook registra ciò che legge e scrive; senza, la mappa mostra il vault ma nessun ragno si muove.']),
+'ja': ('必要なもの', [
+  '**Obsidian**(無料): [obsidian.md](https://obsidian.md) からダウンロードし、*Open folder as vault* でボールトのフォルダーを開きます。キットを使う場合は、キットが作るフォルダー(`MAPA_BOVEDA`、既定は `~/Documents/Boveda`)を選びます。マップでノートをクリックすると Obsidian で開きます。',
+  '**Python 3.9+**: 標準ライブラリのみ、`pip install` 不要。',
+  '**[Claude Code](https://claude.com/claude-code)**: フックが読み書きを記録します。これがないとマップはボールトを表示しますが、クモは動きません。']),
+'zh': ('环境要求', [
+  '**Obsidian**(免费):从 [obsidian.md](https://obsidian.md) 下载,然后用 *Open folder as vault* 打开你的知识库文件夹。使用套件时,选择它创建的文件夹(`MAPA_BOVEDA`,默认 `~/Documents/Boveda`)。在地图中点击笔记会在 Obsidian 中打开。',
+  '**Python 3.9+**:仅用标准库,无需 `pip install`。',
+  '**[Claude Code](https://claude.com/claude-code)**:钩子记录它读写的内容;没有它,地图会显示知识库,但蜘蛛不会移动。']),
+}
+# Guía para principiantes: enlace arriba de todo
+START = {'en': '**New to this?** Follow the [step-by-step beginner guide](BEGINNERS.md): no coding needed.',
+ 'es': '**¿Empiezas desde cero?** Sigue la [guía paso a paso para principiantes](PRINCIPIANTES.md): no hace falta programar.',
+ 'pt': '**Começando do zero?** Siga o [guia passo a passo para iniciantes](BEGINNERS.md) (em inglês; [em espanhol](PRINCIPIANTES.md)).',
+ 'fr': '**Vous débutez ?** Suivez le [guide pas à pas pour débutants](BEGINNERS.md) (en anglais ; [en espagnol](PRINCIPIANTES.md)).',
+ 'de': '**Neu dabei?** Folge der [Schritt-für-Schritt-Anleitung für Einsteiger](BEGINNERS.md) (auf Englisch; [auf Spanisch](PRINCIPIANTES.md)).',
+ 'it': '**Parti da zero?** Segui la [guida passo passo per principianti](BEGINNERS.md) (in inglese; [in spagnolo](PRINCIPIANTES.md)).',
+ 'ja': '**初めての方へ:** [初心者向けステップバイステップガイド](BEGINNERS.md)(英語。[スペイン語版](PRINCIPIANTES.md))をどうぞ。プログラミング不要です。',
+ 'zh': '**新手?** 请按照[分步新手指南](BEGINNERS.md)操作(英文;[西班牙文版](PRINCIPIANTES.md)),无需编程。'}
 THIRD = ["d3 7.9.0 (ISC), `vendor/`", "Departure Mono v1.500 (SIL OFL), `fuentes/`"]
 
 for code, nombre, fname in NAMES:
@@ -157,6 +201,12 @@ for code, nombre, fname in NAMES:
 {nav}
 
 {t['intro']}
+
+{START[code]}
+
+## {REQ[code][0]}
+
+{chr(10).join("- " + x for x in REQ[code][1])}
 
 ## {t['h_install']}
 

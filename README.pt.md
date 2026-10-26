@@ -4,6 +4,14 @@
 
 Mapa 3D do seu cofre do Obsidian em que uma aranha caminha pelas notas que o Claude Code lê (ciano), escreve (âmbar) ou busca (violeta). Não gasta tokens: um hook `PostToolUse` registra cada acesso em `events.jsonl` e a página o consulta a cada 0,8 s. Apenas biblioteca padrão do Python, sem `pip install`.
 
+**Começando do zero?** Siga o [guia passo a passo para iniciantes](BEGINNERS.md) (em inglês; [em espanhol](PRINCIPIANTES.md)).
+
+## Requisitos
+
+- **Obsidian** (gratuito): baixe em [obsidian.md](https://obsidian.md) e use *Open folder as vault* com a pasta do seu cofre. Se usar o kit, escolha a pasta que ele cria (`MAPA_BOVEDA`, padrão `~/Documents/Boveda`). Clicar numa nota do mapa a abre no Obsidian.
+- **Python 3.9+**: só a biblioteca padrão, sem `pip install`.
+- **[Claude Code](https://claude.com/claude-code)**: o hook registra o que ele lê e escreve; sem ele, o mapa mostra o cofre mas nenhuma aranha se move.
+
 ## Instalação
 
 1. Clone o repositório e abra `abrir.cmd` (ou execute `python server.py --abrir`). Abre http://127.0.0.1:8765.

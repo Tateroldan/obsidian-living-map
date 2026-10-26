@@ -4,6 +4,14 @@
 
 Mappa 3D del tuo vault di Obsidian in cui un ragno cammina sulle note che Claude Code legge (ciano), scrive (ambra) o cerca (viola). Non consuma token: un hook `PostToolUse` registra ogni accesso in `events.jsonl` e la pagina lo interroga ogni 0,8 s. Solo libreria standard di Python, nessun `pip install`.
 
+**Parti da zero?** Segui la [guida passo passo per principianti](BEGINNERS.md) (in inglese; [in spagnolo](PRINCIPIANTES.md)).
+
+## Requisiti
+
+- **Obsidian** (gratuito): scaricalo da [obsidian.md](https://obsidian.md) e usa *Open folder as vault* con la cartella del tuo vault. Con il kit, scegli la cartella che crea (`MAPA_BOVEDA`, predefinita `~/Documents/Boveda`). Un clic su una nota della mappa la apre in Obsidian.
+- **Python 3.9+**: solo libreria standard, nessun `pip install`.
+- **[Claude Code](https://claude.com/claude-code)**: il hook registra ciò che legge e scrive; senza, la mappa mostra il vault ma nessun ragno si muove.
+
 ## Installazione
 
 1. Clona il repository e apri `abrir.cmd` (oppure esegui `python server.py --abrir`). Si apre http://127.0.0.1:8765.

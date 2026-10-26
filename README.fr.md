@@ -4,6 +4,14 @@
 
 Carte 3D de votre coffre Obsidian où une araignée parcourt les notes que Claude Code lit (cyan), écrit (ambre) ou recherche (violet). Elle ne consomme aucun token : un hook `PostToolUse` consigne chaque accès dans `events.jsonl` et la page l'interroge toutes les 0,8 s. Bibliothèque standard Python uniquement, sans `pip install`.
 
+**Vous débutez ?** Suivez le [guide pas à pas pour débutants](BEGINNERS.md) (en anglais ; [en espagnol](PRINCIPIANTES.md)).
+
+## Prérequis
+
+- **Obsidian** (gratuit) : téléchargez-le sur [obsidian.md](https://obsidian.md), puis *Open folder as vault* avec le dossier de votre coffre. Avec le kit, choisissez le dossier qu'il crée (`MAPA_BOVEDA`, par défaut `~/Documents/Boveda`). Un clic sur une note de la carte l'ouvre dans Obsidian.
+- **Python 3.9+** : bibliothèque standard uniquement, sans `pip install`.
+- **[Claude Code](https://claude.com/claude-code)** : le hook enregistre ce qu'il lit et écrit ; sans lui, la carte montre le coffre mais aucune araignée ne bouge.
+
 ## Installation
 
 1. Clonez le dépôt et ouvrez `abrir.cmd` (ou lancez `python server.py --abrir`). Cela ouvre http://127.0.0.1:8765.

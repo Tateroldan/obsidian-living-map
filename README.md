@@ -4,6 +4,14 @@ English · [Español](README.es.md) · [Português](README.pt.md) · [Français]
 
 3D map of your Obsidian vault where a spider walks the notes that Claude Code reads (cyan), writes (amber) or searches (violet). It costs no tokens: a `PostToolUse` hook logs every access to `events.jsonl` and the page polls it every 0.8 s. Python standard library only, no `pip install`.
 
+**New to this?** Follow the [step-by-step beginner guide](BEGINNERS.md): no coding needed.
+
+## Requirements
+
+- **Obsidian** (free): download it from [obsidian.md](https://obsidian.md), then use *Open folder as vault* and pick your vault folder. If you use the kit, pick the folder it creates (`MAPA_BOVEDA`, default `~/Documents/Boveda`). Clicking a note in the map opens it in Obsidian.
+- **Python 3.9+**: standard library only, no `pip install`.
+- **[Claude Code](https://claude.com/claude-code)**: the hook records what it reads and writes; without it the map shows the vault but no spider moves.
+
 ## Install
 
 1. Clone the repo and open `abrir.cmd` (or run `python server.py --abrir`). It opens http://127.0.0.1:8765.

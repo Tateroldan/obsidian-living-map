@@ -4,6 +4,14 @@
 
 3D-Karte deines Obsidian-Vaults, auf der eine Spinne über die Notizen läuft, die Claude Code liest (Cyan), schreibt (Bernstein) oder durchsucht (Violett). Sie kostet keine Tokens: Ein `PostToolUse`-Hook protokolliert jeden Zugriff in `events.jsonl`, und die Seite fragt ihn alle 0,8 s ab. Nur die Python-Standardbibliothek, kein `pip install`.
 
+**Neu dabei?** Folge der [Schritt-für-Schritt-Anleitung für Einsteiger](BEGINNERS.md) (auf Englisch; [auf Spanisch](PRINCIPIANTES.md)).
+
+## Voraussetzungen
+
+- **Obsidian** (kostenlos): von [obsidian.md](https://obsidian.md) herunterladen und mit *Open folder as vault* deinen Vault-Ordner öffnen. Mit dem Kit wählst du den Ordner, den es anlegt (`MAPA_BOVEDA`, Standard `~/Documents/Boveda`). Ein Klick auf eine Notiz in der Karte öffnet sie in Obsidian.
+- **Python 3.9+**: nur Standardbibliothek, kein `pip install`.
+- **[Claude Code](https://claude.com/claude-code)**: der Hook protokolliert, was es liest und schreibt; ohne ihn zeigt die Karte den Vault, aber keine Spinne bewegt sich.
+
 ## Installation
 
 1. Klone das Repo und öffne `abrir.cmd` (oder starte `python server.py --abrir`). Es öffnet http://127.0.0.1:8765.

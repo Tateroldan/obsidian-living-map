@@ -4,6 +4,14 @@
 
 Mapa 3D de tu bóveda de Obsidian donde una araña camina por las notas que Claude Code lee (cian), escribe (ámbar) o busca (violeta). No gasta tokens: un hook `PostToolUse` anota cada acceso en `events.jsonl` y la página lo consulta cada 0.8 s. Solo Python estándar, sin `pip install`.
 
+**¿Empiezas desde cero?** Sigue la [guía paso a paso para principiantes](PRINCIPIANTES.md): no hace falta programar.
+
+## Requisitos
+
+- **Obsidian** (gratis): descárgalo de [obsidian.md](https://obsidian.md) y usa *Open folder as vault* («Abrir carpeta como bóveda») con la carpeta de tu bóveda. Si usas el kit, elige la carpeta que crea (`MAPA_BOVEDA`, por defecto `~/Documents/Boveda`). Al hacer clic en una nota del mapa, se abre en Obsidian.
+- **Python 3.9+**: solo biblioteca estándar, sin `pip install`.
+- **[Claude Code](https://claude.com/claude-code)**: el hook registra lo que lee y escribe; sin él, el mapa muestra la bóveda pero ninguna araña se mueve.
+
 ## Instalar
 
 1. Clona el repo y abre `abrir.cmd` (o `python server.py --abrir`). Se abre http://127.0.0.1:8765.

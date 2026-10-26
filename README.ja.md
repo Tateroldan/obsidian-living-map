@@ -4,6 +4,14 @@
 
 Claude Code が読む(シアン)・書く(琥珀)・検索する(紫)ノートの上をクモが歩く、Obsidian ボールトの 3D マップです。トークンは消費しません。`PostToolUse` フックがすべてのアクセスを `events.jsonl` に記録し、ページが 0.8 秒ごとに読み取ります。Python 標準ライブラリのみで、`pip install` は不要です。
 
+**初めての方へ:** [初心者向けステップバイステップガイド](BEGINNERS.md)(英語。[スペイン語版](PRINCIPIANTES.md))をどうぞ。プログラミング不要です。
+
+## 必要なもの
+
+- **Obsidian**(無料): [obsidian.md](https://obsidian.md) からダウンロードし、*Open folder as vault* でボールトのフォルダーを開きます。キットを使う場合は、キットが作るフォルダー(`MAPA_BOVEDA`、既定は `~/Documents/Boveda`)を選びます。マップでノートをクリックすると Obsidian で開きます。
+- **Python 3.9+**: 標準ライブラリのみ、`pip install` 不要。
+- **[Claude Code](https://claude.com/claude-code)**: フックが読み書きを記録します。これがないとマップはボールトを表示しますが、クモは動きません。
+
 ## インストール
 
 1. リポジトリをクローンし、`abrir.cmd` を開きます(または `python server.py --abrir`)。http://127.0.0.1:8765 が開きます。

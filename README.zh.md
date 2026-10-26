@@ -4,6 +4,14 @@
 
 你的 Obsidian 知识库的 3D 地图:一只蜘蛛在 Claude Code 读取(青色)、写入(琥珀色)或搜索(紫色)的笔记上行走。不消耗 token:`PostToolUse` 钩子把每次访问记录到 `events.jsonl`,页面每 0.8 秒读取一次。仅使用 Python 标准库,无需 `pip install`。
 
+**新手?** 请按照[分步新手指南](BEGINNERS.md)操作(英文;[西班牙文版](PRINCIPIANTES.md)),无需编程。
+
+## 环境要求
+
+- **Obsidian**(免费):从 [obsidian.md](https://obsidian.md) 下载,然后用 *Open folder as vault* 打开你的知识库文件夹。使用套件时,选择它创建的文件夹(`MAPA_BOVEDA`,默认 `~/Documents/Boveda`)。在地图中点击笔记会在 Obsidian 中打开。
+- **Python 3.9+**:仅用标准库,无需 `pip install`。
+- **[Claude Code](https://claude.com/claude-code)**:钩子记录它读写的内容;没有它,地图会显示知识库,但蜘蛛不会移动。
+
 ## 安装
 
 1. 克隆仓库并打开 `abrir.cmd`(或运行 `python server.py --abrir`),会打开 http://127.0.0.1:8765。
